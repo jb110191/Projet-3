@@ -78,7 +78,7 @@ public class RecherchePlusMoins {
 			System.out.println();
 
 			coups++;
-		}while(valide != combinaison.length);
+		}while(valide != combinaison.length); // Il faut un nombre de coups maximal
 		
 		System.out.println("Tu as gagné en " + coups + ".");
 		
@@ -106,7 +106,13 @@ public class RecherchePlusMoins {
 			entreeUtilisateur -= combinaison[i] * Math.pow(10, (combinaison.length - (i + 1)));
 		}
 		
-		System.out.println("La combinaison");
+		System.out.print("La combinaison est ");
+		for(int i = 0; i < combinaison.length; i++)
+		{
+			System.out.print(combinaison[i]);
+		}
+		System.out.println();
+
 		
 		// L'ia cherche la combinaison
 		
@@ -118,16 +124,59 @@ public class RecherchePlusMoins {
 		
 		do
 		{
+			coups++;
 			valide = 0;
+			
+			// L' ia joue
+			System.out.println("Tour " + coups);
+			
+			//Si c'est le premier coup
+			if(coups == 1)
+			{
+				for(int i = 0; i < combinaison.length; i++)
+				{
+					double zeroUn = 0.5;
+					do
+					{
+						zeroUn = Math.random();
+						if(zeroUn < 0.5 || zeroUn > 0.5)
+						{
+							nombre[i] = (byte) (4 + Math.round(zeroUn));
+						}											
+					}while(zeroUn == 0.5);
+				}
+			}
+			// Sinon
+			else
+			{
+				for(int i = 0; i < combinaison.length; i++)
+				{
+					if(plusMoinsIA[i] == 1)
+					{
+						nombre[i] += 1;
+					}
+					else if(plusMoinsIA[i] == -1)
+					{
+						nombre[i] -= 1;
+					}
+				}
+			}
+			
+			// On affiche la proposition de l'ia
 			for(int i = 0; i < combinaison.length; i++)
-			{				
-				
-				if(nombre[i] > combinaison[i])
+			{
+				System.out.print(nombre[i]);
+			}
+			System.out.println();
+			
+			for(int i = 0; i < combinaison.length; i++)
+			{
+				if(nombre[i] < combinaison[i])
 				{
 					System.out.print("+");
 					plusMoinsIA[i] = 1;
 				}
-				else if(nombre[i] < combinaison[i])
+				else if(nombre[i] > combinaison[i])
 				{
 					System.out.print("-");
 					plusMoinsIA[i] = -1;
@@ -140,11 +189,9 @@ public class RecherchePlusMoins {
 				}
 			}
 			System.out.println();
-
-			coups++;
+			System.out.println();
 		}while(valide != combinaison.length);
-	
-				
+		
 		System.out.println("Tu as gagné en " + coups + ".");
 	}
 	

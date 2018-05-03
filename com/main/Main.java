@@ -12,9 +12,9 @@ public class Main {
 		 */
 		RecherchePlusMoins xyz = new RecherchePlusMoins();
 		
-		xyz.Challenger();
+		//xyz.Challenger();
 		
-		//xyz.Defenseur();
+		xyz.Defenseur();
 		
 		// affiche quand le progamme se finit
 		System.out.println();
