@@ -14,7 +14,9 @@ public class Main {
 		
 		//xyz.Challenger();
 		
-		xyz.Defenseur();
+		//xyz.Defenseur();
+		
+		xyz.Duel();
 		
 		// affiche quand le progamme se finit
 		System.out.println();
