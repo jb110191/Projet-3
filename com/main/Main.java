@@ -1,6 +1,6 @@
 package com.main;
 
-import com.jeux.RecherchePlusMoins;
+import com.jeux.*;
 
 public class Main {
 	public static void main(String[] args) {
@@ -10,13 +10,21 @@ public class Main {
 		/*
 		 * Test
 		 */
-		RecherchePlusMoins xyz = new RecherchePlusMoins();
+		//RecherchePlusMoins xyz = new RecherchePlusMoins();
 		
 		//xyz.Challenger();
 		
 		//xyz.Defenseur();
 		
-		xyz.Duel();
+		//xyz.Duel();
+		
+		Mastermind msm = new Mastermind();
+		
+		msm.Challenger();
+		
+		//msm.Defenseur();
+		
+		//msm.Duel();
 		
 		// affiche quand le progamme se finit
 		System.out.println();
