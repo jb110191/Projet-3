@@ -42,22 +42,9 @@ public class Mastermind {
 		System.out.println("Mastermind : Challenger");
 		System.out.println("Trouver la combinaison de l'IA");
 		System.out.println();
-		
-		
-		/*
-		 * Test avec combinaison spécial
+
 		// Génération d'une combinaison
 		monAbc.genereCombinaison(combinaisonIA, valeurMax);
-		*/
-		combinaisonIA[0] = 2;
-		combinaisonIA[1] = 2;
-		combinaisonIA[2] = 3;
-		combinaisonIA[3] = 4;
-
-		//Test
-		System.out.print("La combinaison est ");
-		monAbc.afficheCombinaison(combinaisonIA);
-		System.out.println();		
 		
 		// Le joueur cherche la combinaison de l'IA
 		do
@@ -81,6 +68,7 @@ public class Mastermind {
 		byte combinaisonJoueur[] = new byte[4];
 		byte proposition[] = new byte[4];
 		byte valideIA = 0;
+		byte malPlaceIA[] = new byte[1];
 		int coups = 0;
 		
 		/*
@@ -105,13 +93,13 @@ public class Mastermind {
 			System.out.println("Tour " + coups);
 					
 			// On appelle tourIA
-			valideIA = tourIA(combinaisonJoueur, proposition);
+			valideIA = tourIA(combinaisonJoueur, proposition, valideIA, malPlaceIA);
 					
 			// On saute une ligne pour l'affichage
 			System.out.println();
 		}while(valideIA != combinaisonJoueur.length);
 				
-				System.out.println("Tu as gagné en " + coups + " coups.");
+		System.out.println("Tu as gagné en " + coups + " coups.");
 	}
 	
 	public void Duel() {
@@ -132,12 +120,12 @@ public class Mastermind {
 		return monAbc.afficheReponseM(pCombinaisonIA, pProposition);
 	}
 	
-	protected byte tourIA(byte pCombinaisonJoueur[], byte pProposition[]) {
+	protected byte tourIA(byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[]) {
 		// Affichage du jeu
 		System.out.println("\tIA");
 		
 		// L'IA joue
-		//joueIA(pCombinaisonJoueur, pProposition);
+		joueIA(pCombinaisonJoueur, pProposition, pValideIA, pMalPlace);
 		
 		// On affiche la proposition de l'IA
 		System.out.print("\t\tL'IA propose ");
@@ -146,10 +134,35 @@ public class Mastermind {
 		
 		// On affiche la réponse à la proposition de l'IA
 		System.out.print("\t\tRéponse ");
-		return monAbc.afficheReponseR(pCombinaisonJoueur, pProposition);
+		return monAbc.afficheReponseM(pCombinaisonJoueur, pProposition, pMalPlace);
 	}
 	
-	protected void joueIA(byte pCombinaisonJoueur[], byte pProposition[]) {
-		// ?
+	protected void joueIA(byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[]) {
+		
+		/*
+		 * Tableau des combinaison possible ?
+		 * 
+		 * Liste des précedentes porposition ?
+		 * Liste des précédentes valide et malPlace ?
+		 */
+		
+		
+		for(int i = 0; i < pCombinaisonJoueur.length; i++)
+		{
+			if(pValideIA == 0)
+			{
+				if(pMalPlace[0] == 0)
+				{
+					for(int j = 0;  j < pCombinaisonJoueur.length; j++)
+					{
+						pCombinaisonJoueur[j]++;
+					}
+				}
+				else
+				{
+					//
+				}
+			}
+		}
 	}
 }

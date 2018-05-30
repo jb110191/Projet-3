@@ -45,52 +45,51 @@ public class Abc {
 		byte valide = 0;
 		byte malPlace = 0;
 		
-		//test
 		ArrayList<Integer> liste = new ArrayList<Integer>();
 		boolean dansLaListe = false;
-				
-		/*
-		 * Si le chiffre de la proposition est bon -> valide++
-		 * Sinon
-		 * 		si le chiffre de la proposition est présent dans le reste de combinaison
-		 * 			si le chiffre de la proposition est le chiffre de la combinaison n'est pas le même
-		 * 				si le chiffre n'a pas déjà été proposé
-		 */
-		
-		//test
-		System.out.println();
 
 		for(int i = 0; i < pCombinaison.length; i++)
 		{
+			// On vérifie si un chiffre de la proposition est bonne
 			if(pProposition[i] == pCombinaison[i])
 			{
-				System.out.println("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
+				//System.out.println("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
 				valide++;
 			}
+			// Sinon
 			else
 			{
 				for(int j = 0;  j < pCombinaison.length; j++)
 				{
+					// On vérifie si un chiffre de la proposition est dans la combinaison 
 					if(pProposition[i] == pCombinaison[j])
 					{
-						System.out.println("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
+						//System.out.println("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
+						
+						/*
+						 * On verifie que le nième chiffre de la proposition n'est pas égale au nième chiffre de la combinaison
+						 * car si un nième chiffre de la proposition est égale au nième chiffre de la combinaison
+						 * c'est l'affaire du premier if avant le else
+						 */
 						if(pProposition[j] != pCombinaison[j])
 						{
-							System.out.println("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
-							// Besoin de sauvegardé le chiffre de la proposition pour vérifier et ne pars avoir de double ou de triple mal placé
-							dansLaListe = false;
+							//System.out.println("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
 							
+							// On met faux dans dansLaListe avant de faire défiller la liste 
+							dansLaListe = false;
 							for(int k = 0; k < liste.size(); k++)
 							{
+								// Et enfin si le chiffre est dans la liste des chiffres on met vrai dans dansLaListe
 								if(liste.get(k) == pProposition[i])
 								{
-									System.out.println("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
+									//System.out.println("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
 									dansLaListe = true;									
 								}
 							}
+							// Si dans la liste est faux on ajoute le chiffre de la proposition à la liste et on ajoute 1 à malPlace 
 							if(dansLaListe == false)
 							{
-								System.out.println("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
+								//System.out.println("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
 								liste.add((int)pProposition[i]);
 								malPlace++;
 							}
@@ -100,6 +99,73 @@ public class Abc {
 			}
 		}
 		System.out.println("Il y a " + valide + " chiffres bien placé et " + malPlace + " mal placé.");
+
+		return valide;
+	}
+	
+	// Affiche la réponse du Mastemind et renvoie le nombre de chiffre de la combinaison qui sont bon
+	public byte afficheReponseM(byte pCombinaison[], byte pProposition[], byte pMalPlace[]) {
+		// Déclaration de variable
+		byte valide = 0;
+		byte malPlace = 0;
+			
+		ArrayList<Integer> liste = new ArrayList<Integer>();
+		boolean dansLaListe = false;
+
+		for(int i = 0; i < pCombinaison.length; i++)
+		{
+			// On vérifie si un chiffre de la proposition est bonne
+			if(pProposition[i] == pCombinaison[i])
+			{
+				//System.out.println("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
+				valide++;
+			}
+			// Sinon
+			else
+			{
+				for(int j = 0;  j < pCombinaison.length; j++)
+				{
+					// On vérifie si un chiffre de la proposition est dans la combinaison 
+					if(pProposition[i] == pCombinaison[j])
+					{
+						//System.out.println("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
+						
+						/*
+						 * On verifie que le nième chiffre de la proposition n'est pas égale au nième chiffre de la combinaison
+						 * car si un nième chiffre de la proposition est égale au nième chiffre de la combinaison
+						 * c'est l'affaire du premier if avant le else
+						 */
+						if(pProposition[j] != pCombinaison[j])
+						{
+							//System.out.println("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
+							
+							// On met faux dans dansLaListe avant de faire défiller la liste 
+							dansLaListe = false;
+							for(int k = 0; k < liste.size(); k++)
+							{
+								// Et enfin si le chiffre est dans la liste des chiffres on met vrai dans dansLaListe
+								if(liste.get(k) == pProposition[i])
+								{
+									//System.out.println("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
+									dansLaListe = true;									
+								}
+							}
+							// Si dans la liste est faux on ajoute le chiffre de la proposition à la liste et on ajoute 1 à malPlace 
+							if(dansLaListe == false)
+							{
+								//System.out.println("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
+								liste.add((int)pProposition[i]);
+								malPlace++;
+							}
+						}
+					}
+				}
+			}
+		}
+		System.out.println("Il y a " + valide + " chiffres bien placé et " + malPlace + " mal placé.");
+		
+		// On recupère malPlace grace au "pointeur" pMalPlace
+		pMalPlace[0] = malPlace;
 
 		return valide;
 	}

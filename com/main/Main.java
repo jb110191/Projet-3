@@ -10,13 +10,13 @@ public class Main {
 		/*
 		 * Test
 		 */
-		//RecherchePlusMoins xyz = new RecherchePlusMoins();
+		//RecherchePlusMoins rpm = new RecherchePlusMoins();
 		
-		//xyz.Challenger();
+		//rpm.Challenger();
 		
-		//xyz.Defenseur();
+		//rpm.Defenseur();
 		
-		//xyz.Duel();
+		//rpm.Duel();
 		
 		Mastermind msm = new Mastermind();
 		
