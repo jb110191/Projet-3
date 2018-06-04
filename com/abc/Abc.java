@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.logoutil.LogOutil;
+
 public class Abc {
 	// Affiche la combinaison
 	public void afficheCombinaison(byte pCombi[]) {
@@ -53,7 +55,11 @@ public class Abc {
 			// On vérifie si un chiffre de la proposition est bonne
 			if(pProposition[i] == pCombinaison[i])
 			{
-				//System.out.println("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
+				/*
+				 * Logs pas clair
+				 */
+				// Log
+				LogOutil.LOGGER.trace("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
 				valide++;
 			}
 			// Sinon
@@ -64,7 +70,8 @@ public class Abc {
 					// On vérifie si un chiffre de la proposition est dans la combinaison 
 					if(pProposition[i] == pCombinaison[j])
 					{
-						//System.out.println("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
+						// Log
+						LogOutil.LOGGER.trace("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
 						
 						/*
 						 * On verifie que le nième chiffre de la proposition n'est pas égale au nième chiffre de la combinaison
@@ -73,7 +80,8 @@ public class Abc {
 						 */
 						if(pProposition[j] != pCombinaison[j])
 						{
-							//System.out.println("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
+							// Log
+							LogOutil.LOGGER.trace("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
 							
 							// On met faux dans dansLaListe avant de faire défiller la liste 
 							dansLaListe = false;
@@ -82,14 +90,16 @@ public class Abc {
 								// Et enfin si le chiffre est dans la liste des chiffres on met vrai dans dansLaListe
 								if(liste.get(k) == pProposition[i])
 								{
-									//System.out.println("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
+									// Log
+									LogOutil.LOGGER.trace("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
 									dansLaListe = true;									
 								}
 							}
 							// Si dans la liste est faux on ajoute le chiffre de la proposition à la liste et on ajoute 1 à malPlace 
 							if(dansLaListe == false)
 							{
-								//System.out.println("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
+								// Log
+								LogOutil.LOGGER.trace("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
 								liste.add((int)pProposition[i]);
 								malPlace++;
 							}
@@ -117,7 +127,8 @@ public class Abc {
 			// On vérifie si un chiffre de la proposition est bonne
 			if(pProposition[i] == pCombinaison[i])
 			{
-				//System.out.println("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
+				// Log
+				LogOutil.LOGGER.trace("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
 				valide++;
 			}
 			// Sinon
@@ -128,7 +139,8 @@ public class Abc {
 					// On vérifie si un chiffre de la proposition est dans la combinaison 
 					if(pProposition[i] == pCombinaison[j])
 					{
-						//System.out.println("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
+						// Log
+						LogOutil.LOGGER.trace("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
 						
 						/*
 						 * On verifie que le nième chiffre de la proposition n'est pas égale au nième chiffre de la combinaison
@@ -137,7 +149,8 @@ public class Abc {
 						 */
 						if(pProposition[j] != pCombinaison[j])
 						{
-							//System.out.println("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
+							// Log
+							LogOutil.LOGGER.trace("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
 							
 							// On met faux dans dansLaListe avant de faire défiller la liste 
 							dansLaListe = false;
@@ -146,14 +159,16 @@ public class Abc {
 								// Et enfin si le chiffre est dans la liste des chiffres on met vrai dans dansLaListe
 								if(liste.get(k) == pProposition[i])
 								{
-									//System.out.println("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
+									// Log
+									LogOutil.LOGGER.trace("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
 									dansLaListe = true;									
 								}
 							}
 							// Si dans la liste est faux on ajoute le chiffre de la proposition à la liste et on ajoute 1 à malPlace 
 							if(dansLaListe == false)
 							{
-								//System.out.println("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
+								// Log
+								LogOutil.LOGGER.trace("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
 								liste.add((int)pProposition[i]);
 								malPlace++;
 							}
@@ -226,7 +241,7 @@ public class Abc {
 	public void genereCombinaison(byte pCombi[]) {
 		for(int i = 0; i < pCombi.length; i++)
 		{
-			pCombi[i] = (byte) (Math.random() * 9);
+			pCombi[i] = (byte) Math.round(Math.random() * 9);
 		}
 	}
 	
@@ -234,7 +249,7 @@ public class Abc {
 	public void genereCombinaison(byte pCombi[], byte pMax) {
 		for(int i = 0; i < pCombi.length; i++)
 		{
-			pCombi[i] = (byte) (Math.random() * pMax);
+			pCombi[i] = (byte) Math.round((Math.random() * pMax));
 		}
 	}
 	
@@ -252,5 +267,26 @@ public class Abc {
 			pMin[i] = 0;
 			pMax[i] = pValeurMax;
 		}
+	}
+	
+	public void reglageListePossible(ArrayList <ArrayList <Integer>> pListePossible, byte pCombi[], byte pValeurMax) {
+		// On remplis pListePossible avec la longueur de la combinaison
+		for(int i = 0; i < pCombi.length; i++)
+		{
+			pListePossible.add(ajoutePossible(pValeurMax));
+		}
+	}
+	
+	protected ArrayList <Integer> ajoutePossible(byte pValeurMax) {
+		// On créer une liste qui servira de base pour les possibles
+		ArrayList <Integer> listeBase = new ArrayList <Integer>();
+		
+		// On remplis listeBase avec les chiffres possibles
+		for(int i = 0; i < pValeurMax; i++)
+		{
+			listeBase.add(i);
+		}
+		
+		return listeBase;
 	}
 }

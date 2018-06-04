@@ -1,6 +1,9 @@
 package com.jeux;
 
-import com.abc.Abc;
+import java.util.ArrayList;
+
+import com.abc.*;
+import com.logoutil.*;
 
 public class Mastermind {
 	/*
@@ -27,12 +30,15 @@ public class Mastermind {
 	 * Le jeux affiche le nombre de chiffre au bonne emplacement et le nombre de chiffre au mauvais emplacement
 	 */
 	
-	public void Challenger() {
+	public static void Challenger() {
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Début de la méthode Challenger de la classe Mastermind.");
+		
 		// Déclaration de variable
 		byte combinaisonIA[] = new byte[4];
 		byte proposition[] = new byte[4];
 		byte valideJoueur = 0;
-		byte valeurMax = 4;
+		byte nombreValeur = 4;
 		int coups = 0;
 
 		/*
@@ -44,7 +50,7 @@ public class Mastermind {
 		System.out.println();
 
 		// Génération d'une combinaison
-		monAbc.genereCombinaison(combinaisonIA, valeurMax);
+		monAbc.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
 		
 		// Le joueur cherche la combinaison de l'IA
 		do
@@ -61,15 +67,39 @@ public class Mastermind {
 		}while(valideJoueur != combinaisonIA.length); // Il faut un nombre de coups maximal
 				
 		System.out.println("Tu as gagné en " + coups + " coups.");
+		
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Fin de la méthode Challenger de la classe Mastermind.");
 	}
 	
-	public void Defenseur() {
+	public static void Defenseur() {
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe Mastermind.");
+		
 		// Déclaration de variable
+		ArrayList <ArrayList <Integer>> listePossible = new ArrayList <ArrayList <Integer>>();
+
 		byte combinaisonJoueur[] = new byte[4];
-		byte proposition[] = new byte[4];
+		byte proposition[] = new byte[4];		
 		byte valideIA = 0;
 		byte malPlaceIA[] = new byte[1];
+		byte nombreValeur = 4;
 		int coups = 0;
+		
+		// On initialise listePossible
+		monAbc.reglageListePossible(listePossible, combinaisonJoueur,  nombreValeur);
+		
+		// Log pour afficher listePossible
+		if(LogOutil.LOGGER.isTraceEnabled() == true)
+		{
+			for(int i = 0; i < listePossible.size(); i++)
+			{
+				for(int j = 0; j < listePossible.get(i).size(); j++)
+				{
+					LogOutil.LOGGER.trace("listePossible.get(" + i + ").get(" + j + ") = " + listePossible.get(i).get(j));
+				}
+			}
+		}
 		
 		/*
 		 * A mettre dans selection de jeux ?
@@ -93,21 +123,28 @@ public class Mastermind {
 			System.out.println("Tour " + coups);
 					
 			// On appelle tourIA
-			valideIA = tourIA(combinaisonJoueur, proposition, valideIA, malPlaceIA);
+			valideIA = tourIA(listePossible, combinaisonJoueur, proposition, valideIA, malPlaceIA, coups);
 					
 			// On saute une ligne pour l'affichage
 			System.out.println();
 		}while(valideIA != combinaisonJoueur.length);
 				
 		System.out.println("Tu as gagné en " + coups + " coups.");
+		
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe Mastermind.");
 	}
 	
-	public void Duel() {
-		//
+	public static void Duel() {
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Début de la méthode Duel de la classe Mastermind.");
+
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Fin de la méthode Duel de la classe Mastermind.");
 	}
 	
 	// Méthode de tour
-	protected byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
+	protected static byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
 		// Affichage du jeu
 		System.out.println("\tJoueur");
 
@@ -120,12 +157,12 @@ public class Mastermind {
 		return monAbc.afficheReponseM(pCombinaisonIA, pProposition);
 	}
 	
-	protected byte tourIA(byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[]) {
+	protected static byte tourIA(ArrayList <ArrayList <Integer>> pListePossible, byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[], int pCoups) {
 		// Affichage du jeu
 		System.out.println("\tIA");
 		
 		// L'IA joue
-		joueIA(pCombinaisonJoueur, pProposition, pValideIA, pMalPlace);
+		joueIA(pListePossible ,pCombinaisonJoueur, pProposition, pValideIA, pMalPlace, pCoups);
 		
 		// On affiche la proposition de l'IA
 		System.out.print("\t\tL'IA propose ");
@@ -137,7 +174,7 @@ public class Mastermind {
 		return monAbc.afficheReponseM(pCombinaisonJoueur, pProposition, pMalPlace);
 	}
 	
-	protected void joueIA(byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[]) {
+	protected static void joueIA(ArrayList <ArrayList <Integer>> pListePossible, byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[], int pCoups) {
 		
 		/*
 		 * Tableau des combinaison possible ?
@@ -146,23 +183,39 @@ public class Mastermind {
 		 * Liste des précédentes valide et malPlace ?
 		 */
 		
+		// On joue le premier coups
+		if(pCoups == 0)
+		{
+			for(int i = 0; i < pCombinaisonJoueur.length; i++)
+			{
+				pProposition[i] = (byte)((int) (pListePossible.get(i).get(0)));
+			}
+		}
 		
-		for(int i = 0; i < pCombinaisonJoueur.length; i++)
+		// On retire les valeurs impossibles et on fait jouer l'IA
+		else
 		{
 			if(pValideIA == 0)
 			{
-				if(pMalPlace[0] == 0)
+				for(int i = 0; i < pCombinaisonJoueur.length; i++)
 				{
-					for(int j = 0;  j < pCombinaisonJoueur.length; j++)
+					for(int j = 0; j < pListePossible.get(i).size(); j++)
 					{
-						pCombinaisonJoueur[j]++;
+						if(pListePossible.get(i).get(j) == pProposition[i])
+						{
+							pListePossible.get(i).remove(j);			
+						}
 					}
-				}
-				else
-				{
-					//
-				}
+				} 
 			}
+			// ?
+			else if(pValideIA > 0)
+			{
+				//
+			}
+			
+			// L'IA joue
+			
 		}
 	}
 }

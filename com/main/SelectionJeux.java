@@ -2,6 +2,8 @@ package com.main;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import com.logoutil.*;
 /**
  * 
  * @author Julian
@@ -22,7 +24,7 @@ public class SelectionJeux {
 	 * Méthode
 	 */
 	// Méthode pour choissir le jeux grace à un switch qui appelle la méthode mode de jeu pour séléctionner le mode qui appellera le jeux en lui même
-	static void ChoixJeux() {
+	static void choixJeux() {
 		// Déclaration des variables
 		int choix = 0;
 		
@@ -44,22 +46,15 @@ public class SelectionJeux {
 				// Récupération du choix
 				choix = clavier.nextInt();
 
-				switch(choix)
+				if(choix != 1 && choix != 2)
 				{
-				case 1 :
-					// On appelle ?
-					clavier.close();
-					break;
-				case 2 :
-					// On appelle ?
-					clavier.close();
-					break;
-				default :
 					System.out.println("Choisis une nombre valide, y a pas de jeux caché");
-					break;
 				}
 
 			}while(choix != 1 && choix != 2);
+			
+			// On appelle la méthode choixJeux
+			SelectionModes.choixModes(choix);
 			
 			// Affichage de la sortie du programme
 			System.out.println();
@@ -69,9 +64,9 @@ public class SelectionJeux {
 		// Exeception
 		catch(InputMismatchException e)
 		{
-			System.out.println("catch");
-			clavier.close();
 			// Affichage de l'erreur
+			LogOutil.LOGGER.trace(e.getStackTrace());
+			clavier.close();
 		}
 	}
 }

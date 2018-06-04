@@ -1,9 +1,8 @@
 package com.jeux;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import com.abc.*;
+import com.logoutil.*;
 
 public class RecherchePlusMoins {
 	/*
@@ -33,7 +32,10 @@ public class RecherchePlusMoins {
 	 * 		- si le chiffre de la combinaison est inférieur
 	 */
 	
-	public void Challenger () {
+	public static void Challenger () {
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Début de la méthode Challenger de la classe RecherchePlusMoins.");
+		
 		// Déclaration de variable
 		byte combinaisonIA[] = new byte[4];
 		byte proposition[] = new byte[4];
@@ -66,9 +68,15 @@ public class RecherchePlusMoins {
 		}while(valideJoueur != combinaisonIA.length); // Il faut un nombre de coups maximal
 		
 		System.out.println("Tu as gagné en " + coups + " coups.");
+		
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Fin de la méthode Challenger de la classe RecherchePlusMoins.");
 	}
 	
-	public void Defenseur() {
+	public static void Defenseur() {
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe RecherchePlusMoins.");
+
 		// Déclaration de variable
 		byte combinaisonJoueur[] = new byte[4];
 		byte proposition[] = new byte[4];
@@ -109,9 +117,15 @@ public class RecherchePlusMoins {
 		}while(valideIA != combinaisonJoueur.length);
 		
 		System.out.println("Tu as gagné en " + coups + " coups.");
+		
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe RecherchePlusMoins.");
 	}
 	
-	public void Duel () {
+	public static void Duel () {
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Début de la méthode Duel de la classe RecherchePlusMoins.");
+
 		// Déclaration de variable
 		byte combinaisonJoueur[] = new byte[4];
 		byte combinaisonIA[] = new byte[4];
@@ -193,11 +207,13 @@ public class RecherchePlusMoins {
 		{
 			System.out.println("L'IA a gagné en " + coups + " coups.");
 		}
-
+		
+		// Log pour afficher le début de la méthode
+		LogOutil.LOGGER.trace("Fin de la méthode Duel de la classe RecherchePlusMoins.");
 	}
 	
 	// Méthode de tour
-	protected byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
+	protected static byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
 		// Affichage du jeu
 		System.out.println("\tJoueur");
 		
@@ -210,7 +226,7 @@ public class RecherchePlusMoins {
 		return monAbc.afficheReponseR(pCombinaisonIA, pProposition);
 	}
 	
-	protected byte tourIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
+	protected static byte tourIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
 		// Affichage du jeu
 		System.out.println("\tIA");
 		
@@ -227,7 +243,7 @@ public class RecherchePlusMoins {
 		return monAbc.afficheReponseR(pCombinaisonJoueur, pProposition);
 	}
 	
-	protected void joueIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
+	protected static void joueIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
 		for(int i = 0; i < pCombinaisonJoueur.length ; i++)
 		{
 			pProposition[i] = (byte) (Math.round((pMin[i] + pMax[i]) / 2));
