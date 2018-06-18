@@ -20,8 +20,6 @@ public class Mastermind {
 	 * Méthode
 	 */
 	
-	
-	
 	// Méthode des modes de jeux
 	
 	/*
@@ -77,8 +75,6 @@ public class Mastermind {
 		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe Mastermind.");
 		
 		// Déclaration de variable
-		ArrayList <ArrayList <Integer>> listePossible = new ArrayList <ArrayList <Integer>>();
-
 		byte combinaisonJoueur[] = new byte[4];
 		byte proposition[] = new byte[4];		
 		byte valideIA = 0;
@@ -86,17 +82,21 @@ public class Mastermind {
 		byte nombreValeur = 4;
 		int coups = 0;
 		
+		ArrayList <ArrayList <Integer>> listesPossibles = new ArrayList <ArrayList <Integer>>();
+		
+		ArrayList <Integer> chiffrePossible = new ArrayList <Integer>();
+		
 		// On initialise listePossible
-		monAbc.reglageListePossible(listePossible, combinaisonJoueur,  nombreValeur);
+		monAbc.reglageListePossible(listesPossibles, combinaisonJoueur.length, nombreValeur);
 		
 		// Log pour afficher listePossible
 		if(LogOutil.LOGGER.isTraceEnabled() == true)
 		{
-			for(int i = 0; i < listePossible.size(); i++)
+			for(int i = 0; i < listesPossibles.size(); i++)
 			{
-				for(int j = 0; j < listePossible.get(i).size(); j++)
+				for(int j = 0; j < listesPossibles.get(i).size(); j++)
 				{
-					LogOutil.LOGGER.trace("listePossible.get(" + i + ").get(" + j + ") = " + listePossible.get(i).get(j));
+					LogOutil.LOGGER.trace("listesPossibles.get(" + i + ").get(" + j + ") = " + listesPossibles.get(i).get(j));
 				}
 			}
 		}
@@ -123,13 +123,20 @@ public class Mastermind {
 			System.out.println("Tour " + coups);
 					
 			// On appelle tourIA
-			valideIA = tourIA(listePossible, combinaisonJoueur, proposition, valideIA, malPlaceIA, coups);
+			valideIA = tourIA(listesPossibles, chiffrePossible, combinaisonJoueur, proposition, valideIA, malPlaceIA, coups);
 					
 			// On saute une ligne pour l'affichage
 			System.out.println();
-		}while(valideIA != combinaisonJoueur.length);
+		}while(valideIA != combinaisonJoueur.length && coups < 10);
 				
-		System.out.println("Tu as gagné en " + coups + " coups.");
+		if(valideIA == combinaisonJoueur.length)
+		{
+			System.out.println("Tu as gagné en " + coups + " coups.");
+		}
+		else
+		{
+			System.out.println("Tu as perdu.");
+		}
 		
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe Mastermind.");
@@ -157,12 +164,12 @@ public class Mastermind {
 		return monAbc.afficheReponseM(pCombinaisonIA, pProposition);
 	}
 	
-	protected static byte tourIA(ArrayList <ArrayList <Integer>> pListePossible, byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[], int pCoups) {
+	protected static byte tourIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[], int pCoups) {
 		// Affichage du jeu
 		System.out.println("\tIA");
 		
 		// L'IA joue
-		joueIA(pListePossible ,pCombinaisonJoueur, pProposition, pValideIA, pMalPlace, pCoups);
+		joueIA(pListesPossibles, pChiffrePossible, pCombinaisonJoueur, pProposition, pValideIA, pMalPlace, pCoups);
 		
 		// On affiche la proposition de l'IA
 		System.out.print("\t\tL'IA propose ");
@@ -174,7 +181,7 @@ public class Mastermind {
 		return monAbc.afficheReponseM(pCombinaisonJoueur, pProposition, pMalPlace);
 	}
 	
-	protected static void joueIA(ArrayList <ArrayList <Integer>> pListePossible, byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[], int pCoups) {
+	protected static void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[], int pCoups) {
 		
 		/*
 		 * Tableau des combinaison possible ?
@@ -182,40 +189,17 @@ public class Mastermind {
 		 * Liste des précedentes porposition ?
 		 * Liste des précédentes valide et malPlace ?
 		 */
-		
-		// On joue le premier coups
-		if(pCoups == 0)
+		// Déclaration de variable
+		if(pCoups == 1)
 		{
-			for(int i = 0; i < pCombinaisonJoueur.length; i++)
+			for(int i = 0; i < pProposition.length; i++)
 			{
-				pProposition[i] = (byte)((int) (pListePossible.get(i).get(0)));
+				pProposition[i] = (byte)(int)pListesPossibles.get(0).get(i);
 			}
 		}
-		
-		// On retire les valeurs impossibles et on fait jouer l'IA
 		else
 		{
-			if(pValideIA == 0)
-			{
-				for(int i = 0; i < pCombinaisonJoueur.length; i++)
-				{
-					for(int j = 0; j < pListePossible.get(i).size(); j++)
-					{
-						if(pListePossible.get(i).get(j) == pProposition[i])
-						{
-							pListePossible.get(i).remove(j);			
-						}
-					}
-				} 
-			}
-			// ?
-			else if(pValideIA > 0)
-			{
-				//
-			}
-			
-			// L'IA joue
-			
+			//
 		}
 	}
 }

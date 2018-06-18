@@ -269,24 +269,57 @@ public class Abc {
 		}
 	}
 	
-	public void reglageListePossible(ArrayList <ArrayList <Integer>> pListePossible, byte pCombi[], byte pValeurMax) {
-		// On remplis pListePossible avec la longueur de la combinaison
-		for(int i = 0; i < pCombi.length; i++)
+	public void reglageListePossible(ArrayList <ArrayList <Integer>> pListesPossibles, int pTailleCombinaison, byte pNombreValeur) {		
+		/*
+		 * Pour avoir plus tard  une liste avec les chiffres dans le désordre
+		 * Créer une ArrayList d'Integer listeHasard avec les chiffres au hasard
+		 * Remplacer
+		 * 		les "listeTampon.add(0);" par "listeTampon.add(listeHasard.get(0));"
+		 * 		et les "listeTampon.add(unNombre);" par "listeTampon.add(listeHasard.get(unNombre));"
+		 */
+		ArrayList <Integer> listeHasard = new ArrayList <Integer>();
+		
+		reglageListeHasard(listeHasard, pNombreValeur);
+		
+		for(int i = 0; i < Math.pow(pNombreValeur, pTailleCombinaison); i++)
 		{
-			pListePossible.add(ajoutePossible(pValeurMax));
+			String strTampon = new String();
+			ArrayList <Integer> liste = new ArrayList <Integer>();
+			
+			strTampon = Integer.toString(Integer.parseInt(Integer.toString(i), 10), pNombreValeur);
+			strTampon = String.format("%1$" + pTailleCombinaison + "s", strTampon).replace(" ", "0");
+			
+			for(int j = 0; j < pTailleCombinaison; j++)
+			{
+				liste.add(listeHasard.get((int) strTampon.charAt(j) - 48));
+			}
+			
+			/*
+			 * Affichage
+			 */
+			for(int j = 0; j < liste.size(); j++)
+			{
+				System.out.print(liste.get(j));
+			}
+			System.out.println();
+			
+			pListesPossibles.add(liste);
 		}
 	}
 	
-	protected ArrayList <Integer> ajoutePossible(byte pValeurMax) {
-		// On créer une liste qui servira de base pour les possibles
-		ArrayList <Integer> listeBase = new ArrayList <Integer>();
+	public void reglageListeHasard(ArrayList <Integer> pListeHasard, byte pNombreValeur) {
+		ArrayList <Integer> listeTampon = new ArrayList <Integer>();
 		
-		// On remplis listeBase avec les chiffres possibles
-		for(int i = 0; i < pValeurMax; i++)
+		for(int i = 0; i < pNombreValeur; i++)
 		{
-			listeBase.add(i);
+			listeTampon.add(i);
 		}
 		
-		return listeBase;
+		while(listeTampon.size() != 0)
+		{			
+			int hazard = (int) (Math.random() * listeTampon.size()) % (listeTampon.size() + 1);
+			pListeHasard.add(listeTampon.get(hazard));
+			listeTampon.remove(hazard);
+		}
 	}
 }
