@@ -22,9 +22,9 @@ public class Main {
 		
 		//com.jeux.Mastermind.Challenger();
 		
-		com.jeux.Mastermind.Defenseur();
+		//com.jeux.Mastermind.Defenseur();
 		
-		//com.jeux.Mastermind.Duel();
+		com.jeux.Mastermind.Duel();
 		
 		// Log pour afficher la fin du programme
 		LogOutil.LOGGER.trace("Fin du programme");
