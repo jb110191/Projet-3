@@ -76,29 +76,45 @@ public class Mastermind {
 		
 		// Déclaration de variable
 		byte combinaisonJoueur[] = new byte[4];
-		byte proposition[] = new byte[4];		
-		byte valideIA = 0;
-		byte malPlaceIA[] = new byte[1];
+		byte proposition[] = new byte[4];	
+		
+		MastermindVariable mesNouvellesVariables = new MastermindVariable();
+		MastermindVariable mesAnciennesVariables = new MastermindVariable();
+		
 		byte nombreValeur = 4;
 		int coups = 0;
 		
 		ArrayList <ArrayList <Integer>> listesPossibles = new ArrayList <ArrayList <Integer>>();
-		
 		ArrayList <Integer> chiffrePossible = new ArrayList <Integer>();
+		ArrayList <Integer> chiffreTrouve = new ArrayList <Integer>();
 		
 		// On initialise listePossible
-		monAbc.reglageListePossible(listesPossibles, combinaisonJoueur.length, nombreValeur);
+		monAbc.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
 		
-		// Log pour afficher listePossible
+		/*
+		 * Log
+		 * pour vérifier les combinaisons dans listesPossibles
+		 */
 		if(LogOutil.LOGGER.isTraceEnabled() == true)
 		{
+			String str = "La listes des combinaisons";
+			
 			for(int i = 0; i < listesPossibles.size(); i++)
 			{
+				if((i % (Math.pow(nombreValeur, 2))) == 0)
+				{
+					str += "\n\t\t";
+				}
+				else
+				{
+					str += " - ";
+				}
 				for(int j = 0; j < listesPossibles.get(i).size(); j++)
 				{
-					LogOutil.LOGGER.trace("listesPossibles.get(" + i + ").get(" + j + ") = " + listesPossibles.get(i).get(j));
+					str += listesPossibles.get(i).get(j);
 				}
 			}
+			LogOutil.LOGGER.trace(str);
 		}
 		
 		/*
@@ -121,21 +137,28 @@ public class Mastermind {
 			// On ajoute un coups à chaque boucle
 			coups++;
 			System.out.println("Tour " + coups);
+			
+			/*
+			 * Log
+			 * pour afficher le tour
+			 */
+			LogOutil.LOGGER.trace("Tour " + coups);
+			
 					
 			// On appelle tourIA
-			valideIA = tourIA(listesPossibles, chiffrePossible, combinaisonJoueur, proposition, valideIA, malPlaceIA, coups);
+			tourIA(listesPossibles, chiffrePossible, chiffreTrouve, combinaisonJoueur, proposition, mesNouvellesVariables, mesAnciennesVariables, coups);
 					
 			// On saute une ligne pour l'affichage
-			System.out.println();
-		}while(valideIA != combinaisonJoueur.length && coups < 10);
+			System.out.println();		
+		}while(mesNouvellesVariables.valide != combinaisonJoueur.length && coups < 10);
 				
-		if(valideIA == combinaisonJoueur.length)
+		if(mesNouvellesVariables.valide == combinaisonJoueur.length)
 		{
-			System.out.println("Tu as gagné en " + coups + " coups.");
+			System.out.println("L'IA a gagné en " + coups + " coups.");
 		}
 		else
 		{
-			System.out.println("Tu as perdu.");
+			System.out.println("L'IA a perdu.");
 		}
 		
 		// Log pour afficher le début de la méthode
@@ -164,24 +187,47 @@ public class Mastermind {
 		return monAbc.afficheReponseM(pCombinaisonIA, pProposition);
 	}
 	
-	protected static byte tourIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[], int pCoups) {
+	protected static void tourIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
 		// Affichage du jeu
 		System.out.println("\tIA");
 		
 		// L'IA joue
-		joueIA(pListesPossibles, pChiffrePossible, pCombinaisonJoueur, pProposition, pValideIA, pMalPlace, pCoups);
+		joueIA(pListesPossibles, pChiffrePossible, pChiffreTrouve, pCombinaisonJoueur, pProposition, pMesNouvellesVariables, pMesAnciennesVariables, pCoups);
 		
 		// On affiche la proposition de l'IA
 		System.out.print("\t\tL'IA propose ");
 		monAbc.afficheCombinaison(pProposition);
 		System.out.println("");
 		
+		/*
+		 * Log
+		 * pour vérifier les valides est malPlacé
+		 */
+		if(LogOutil.LOGGER.isTraceEnabled() == true)
+		{
+			String str = "Valeur des valides et malPlacés";
+			
+			str += "\n\t\t";
+			str += "pMesNouvellesVariables.Valide " + pMesNouvellesVariables.valide;
+			str += "\n\t\t";
+			str += "pMesNouvellesVariables.malPlace " + pMesNouvellesVariables.malPlace;
+			str += "\n\t\t";
+			str += "pMesAnciennesVariables.Valide " + pMesAnciennesVariables.valide;
+			str += "\n\t\t";
+			str += "pMesAnciennesVariables.malPlace " + pMesAnciennesVariables.malPlace;
+			
+			LogOutil.LOGGER.trace(str);
+		}
+		
+		// On déplace les valide et malPlace pour le prochain coup
+		monAbc.guereMastermindVariable(pMesNouvellesVariables, pMesAnciennesVariables);
+		
 		// On affiche la réponse à la proposition de l'IA
 		System.out.print("\t\tRéponse ");
-		return monAbc.afficheReponseM(pCombinaisonJoueur, pProposition, pMalPlace);
+		monAbc.afficheReponseM(pCombinaisonJoueur, pProposition, pMesNouvellesVariables);
 	}
 	
-	protected static void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, byte pCombinaisonJoueur[], byte pProposition[], byte pValideIA, byte pMalPlace[], int pCoups) {
+	protected static void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
 		
 		/*
 		 * Tableau des combinaison possible ?
@@ -190,16 +236,82 @@ public class Mastermind {
 		 * Liste des précédentes valide et malPlace ?
 		 */
 		// Déclaration de variable
-		if(pCoups == 1)
+		if(pCoups != 1)
 		{
-			for(int i = 0; i < pProposition.length; i++)
-			{
-				pProposition[i] = (byte)(int)pListesPossibles.get(0).get(i);
+			// On supprime la combinaison que l'on à testé précedement
+			/*
+			 * Pas directement il le faut pur comparer avec les valide et malPlace 
+			 * pListesPossibles.remove(0);
+			*/
+			
+			/*
+			System.out.println("if(pChiffreTrouve.size() != pCombinaisonJoueur.length)");
+			System.out.println("if(" + pChiffreTrouve.size() + " != " + pCombinaisonJoueur.length + ")");
+			*/
+			
+			if(pChiffreTrouve.size() != pCombinaisonJoueur.length)
+			{				
+				// On crée un variable pour une boucle
+				int nombreNouveauxIndices = (pMesNouvellesVariables.valide + pMesNouvellesVariables.malPlace) - (pMesAnciennesVariables.valide + pMesAnciennesVariables.malPlace);
+				int nombreIndiceCombinaison = 0;
+				
+				// On déroule les valeurs dans la liste des possibles
+				for(int i = 0; i < pListesPossibles.size(); i++)
+				{
+					//On met nombreIndiceCombinaison à 0 au début de chaque boucle
+					nombreIndiceCombinaison = 0;
+					
+					for(int j = 0; j < pListesPossibles.get(i).size(); j++)
+					{
+						if(pListesPossibles.get(i).get(j) == pChiffrePossible.get(0))
+						{
+							nombreIndiceCombinaison++;
+						}
+					}
+					
+					/*
+					 * Log
+					 */
+					if(LogOutil.LOGGER.isTraceEnabled() == true)
+					{
+						String str = "";
+						for(int j = 0; j < pListesPossibles.get(i).size(); j++)
+						{
+							str += pListesPossibles.get(i).get(j);
+						}
+						LogOutil.LOGGER.trace("La combinaison " + str + "\nElle a " + nombreIndiceCombinaison + " fois la valeur et il faut exactement " + nombreNouveauxIndices + " fois la valeur pour rester dans la listes des possibles.");
+					}
+					
+					// Si nombreIndiceCombinaison est différent de nombreNouveauxIndices ont retire la combinaison
+					if(nombreIndiceCombinaison != nombreNouveauxIndices)
+					{
+						/*
+						 * Log
+						 */
+						LogOutil.LOGGER.trace("La combinaison est supprimé");
+						
+						pListesPossibles.remove(i);
+						i--;
+					}
+				}
+				for(int i = 0; i < nombreNouveauxIndices; i++)
+				{
+					pChiffreTrouve.add(pChiffrePossible.get(0));
+				}
+				// On supprime le chiffre qui a été testé
+				pChiffrePossible.remove(0);
 			}
 		}
-		else
+		
+		// On fait la première proposition possible
+		for(int i = 0; i < pProposition.length; i++)
 		{
-			//
+			pProposition[i] = (byte)(int)pListesPossibles.get(0).get(i);
 		}
+		
+		/*
+		 * On supprime la combinaison choissis
+		 */
+		pListesPossibles.remove(0);
 	}
 }

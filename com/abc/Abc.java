@@ -114,10 +114,8 @@ public class Abc {
 	}
 	
 	// Affiche la réponse du Mastemind et renvoie le nombre de chiffre de la combinaison qui sont bon
-	public byte afficheReponseM(byte pCombinaison[], byte pProposition[], byte pMalPlace[]) {
+	public void afficheReponseM(byte pCombinaison[], byte pProposition[], MastermindVariable pMesNouvellesVariables) {
 		// Déclaration de variable
-		byte valide = 0;
-		byte malPlace = 0;
 			
 		ArrayList<Integer> liste = new ArrayList<Integer>();
 		boolean dansLaListe = false;
@@ -129,7 +127,7 @@ public class Abc {
 			{
 				// Log
 				LogOutil.LOGGER.trace("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
-				valide++;
+				pMesNouvellesVariables.valide++;;
 			}
 			// Sinon
 			else
@@ -170,19 +168,14 @@ public class Abc {
 								// Log
 								LogOutil.LOGGER.trace("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
 								liste.add((int)pProposition[i]);
-								malPlace++;
+								pMesNouvellesVariables.malPlace++;
 							}
 						}
 					}
 				}
 			}
 		}
-		System.out.println("Il y a " + valide + " chiffres bien placé et " + malPlace + " mal placé.");
-		
-		// On recupère malPlace grace au "pointeur" pMalPlace
-		pMalPlace[0] = malPlace;
-
-		return valide;
+		System.out.println("Il y a " + pMesNouvellesVariables.valide + " chiffres bien placé et " + pMesNouvellesVariables.malPlace + " mal placé.");
 	}
 	
 	// Renvoie 0 ou 1 de façon aléatoire
@@ -269,7 +262,7 @@ public class Abc {
 		}
 	}
 	
-	public void reglageListePossible(ArrayList <ArrayList <Integer>> pListesPossibles, int pTailleCombinaison, byte pNombreValeur) {		
+	public void reglageListePossible(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, int pTailleCombinaison, byte pNombreValeur) {		
 		/*
 		 * Pour avoir plus tard  une liste avec les chiffres dans le désordre
 		 * Créer une ArrayList d'Integer listeHasard avec les chiffres au hasard
@@ -277,9 +270,12 @@ public class Abc {
 		 * 		les "listeTampon.add(0);" par "listeTampon.add(listeHasard.get(0));"
 		 * 		et les "listeTampon.add(unNombre);" par "listeTampon.add(listeHasard.get(unNombre));"
 		 */
-		ArrayList <Integer> listeHasard = new ArrayList <Integer>();
-		
-		reglageListeHasard(listeHasard, pNombreValeur);
+
+		/*
+		 * Test
+		 */
+		//reglageListeHasard(pChiffrePossible, pNombreValeur);
+		reglageListeOrdre(pChiffrePossible, pNombreValeur);
 		
 		for(int i = 0; i < Math.pow(pNombreValeur, pTailleCombinaison); i++)
 		{
@@ -291,22 +287,19 @@ public class Abc {
 			
 			for(int j = 0; j < pTailleCombinaison; j++)
 			{
-				liste.add(listeHasard.get((int) strTampon.charAt(j) - 48));
+				liste.add(pChiffrePossible.get((int) strTampon.charAt(j) - 48));
 			}
-			
-			/*
-			 * Affichage
-			 */
-			for(int j = 0; j < liste.size(); j++)
-			{
-				System.out.print(liste.get(j));
-			}
-			System.out.println();
-			
 			pListesPossibles.add(liste);
 		}
 	}
 	
+	private void reglageListeOrdre(ArrayList<Integer> pChiffrePossible, byte pNombreValeur) {
+		for(int i = 0; i < pNombreValeur; i++)
+		{
+			pChiffrePossible.add(i);
+		}
+	}
+
 	public void reglageListeHasard(ArrayList <Integer> pListeHasard, byte pNombreValeur) {
 		ArrayList <Integer> listeTampon = new ArrayList <Integer>();
 		
@@ -321,5 +314,12 @@ public class Abc {
 			pListeHasard.add(listeTampon.get(hazard));
 			listeTampon.remove(hazard);
 		}
+	}
+	
+	public void guereMastermindVariable(MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables) {
+		pMesAnciennesVariables.valide = pMesNouvellesVariables.valide;
+		pMesAnciennesVariables.malPlace = pMesNouvellesVariables.malPlace;
+		pMesNouvellesVariables.valide = 0;
+		pMesNouvellesVariables.malPlace = 0;
 	}
 }
