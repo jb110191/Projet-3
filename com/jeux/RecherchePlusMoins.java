@@ -32,7 +32,7 @@ public class RecherchePlusMoins {
 	 * 		- si le chiffre de la combinaison est inférieur
 	 */
 	
-	public static void Challenger () {
+	public void Challenger () {
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Début de la méthode Challenger de la classe RecherchePlusMoins.");
 		
@@ -73,7 +73,7 @@ public class RecherchePlusMoins {
 		LogOutil.LOGGER.trace("Fin de la méthode Challenger de la classe RecherchePlusMoins.");
 	}
 	
-	public static void Defenseur() {
+	public void Defenseur() {
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe RecherchePlusMoins.");
 
@@ -122,7 +122,7 @@ public class RecherchePlusMoins {
 		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe RecherchePlusMoins.");
 	}
 	
-	public static void Duel () {
+	public void Duel () {
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Début de la méthode Duel de la classe RecherchePlusMoins.");
 
@@ -213,7 +213,7 @@ public class RecherchePlusMoins {
 	}
 	
 	// Méthode de tour
-	protected static byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
+	protected byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
 		// Affichage du jeu
 		System.out.println("\tJoueur");
 		
@@ -226,7 +226,7 @@ public class RecherchePlusMoins {
 		return monAbc.afficheReponseR(pCombinaisonIA, pProposition);
 	}
 	
-	protected static byte tourIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
+	protected byte tourIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
 		// Affichage du jeu
 		System.out.println("\tIA");
 		
@@ -243,7 +243,7 @@ public class RecherchePlusMoins {
 		return monAbc.afficheReponseR(pCombinaisonJoueur, pProposition);
 	}
 	
-	protected static void joueIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
+	protected void joueIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
 		for(int i = 0; i < pCombinaisonJoueur.length ; i++)
 		{
 			pProposition[i] = (byte) (Math.round((pMin[i] + pMax[i]) / 2));

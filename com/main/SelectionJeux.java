@@ -24,7 +24,7 @@ public class SelectionJeux {
 	 * Méthode
 	 */
 	// Méthode pour choissir le jeux grace à un switch qui appelle la méthode mode de jeu pour séléctionner le mode qui appellera le jeux en lui même
-	static void choixJeux() {
+	void choixJeux() {
 		// Déclaration des variables
 		int choix = 0;
 		
@@ -32,6 +32,9 @@ public class SelectionJeux {
 		// Switch pour le choix du jeux
 		// Création d'un Scanner pour récupérer le choix puis sa fermeture
 		Scanner clavier = new Scanner(System.in);
+		
+		// On crée une instance de SelectionModes
+		SelectionModes slctMd = new SelectionModes();
 		
 		// Test
 		try
@@ -54,7 +57,7 @@ public class SelectionJeux {
 			}while(choix != 1 && choix != 2);
 			
 			// On appelle la méthode choixJeux
-			SelectionModes.choixModes(choix);
+			slctMd.choixModes(choix);
 			
 			// Affichage de la sortie du programme
 			System.out.println();

@@ -28,7 +28,7 @@ public class Mastermind {
 	 * Le jeux affiche le nombre de chiffre au bonne emplacement et le nombre de chiffre au mauvais emplacement
 	 */
 	
-	public static void Challenger() {
+	public void Challenger() {
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Début de la méthode Challenger de la classe Mastermind.");
 		
@@ -76,7 +76,7 @@ public class Mastermind {
 		LogOutil.LOGGER.trace("Fin de la méthode Challenger de la classe Mastermind.");
 	}
 	
-	public static void Defenseur() {
+	public void Defenseur() {
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe Mastermind.");
 		
@@ -171,7 +171,7 @@ public class Mastermind {
 		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe Mastermind.");
 	}
 	
-	public static void Duel() {
+	public void Duel() {
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Début de la méthode Duel de la classe Mastermind.");
 		
@@ -307,7 +307,7 @@ public class Mastermind {
 	}
 	
 	// Méthode de tour
-	protected static byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
+	protected byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
 		// Affichage du jeu
 		System.out.println("\tJoueur");
 
@@ -320,7 +320,7 @@ public class Mastermind {
 		return monAbc.afficheReponseM(pCombinaisonIA, pProposition);
 	}
 	
-	protected static void tourIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
+	protected void tourIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
 		// Affichage du jeu
 		System.out.println("\tIA");
 		
@@ -360,7 +360,7 @@ public class Mastermind {
 		monAbc.afficheReponseM(pCombinaisonJoueur, pProposition, pMesNouvellesVariables);
 	}
 	
-	protected static void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
+	protected void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
 		
 		/*
 		 * Tableau des combinaison possible ?

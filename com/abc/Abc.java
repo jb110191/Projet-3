@@ -212,7 +212,7 @@ public class Abc {
 	}
 	
 	// Récupère un entrée de l'utilisateur
-	protected short entree() {
+	public short entree() {
 		// Déclaration de variable
 		Scanner clavier = new Scanner(System.in);
 		short entreeUtilisateur = 0;
@@ -254,7 +254,7 @@ public class Abc {
 		}
 	}
 	
-	protected void reglageMinMax(byte pMin[], byte pMax[], byte pValeurMax) {
+	public void reglageMinMax(byte pMin[], byte pMax[], byte pValeurMax) {
 		for(int i = 0; i < pMin.length; i++)
 		{
 			pMin[i] = 0;
@@ -293,7 +293,7 @@ public class Abc {
 		}
 	}
 	
-	private void reglageListeOrdre(ArrayList<Integer> pChiffrePossible, byte pNombreValeur) {
+	public void reglageListeOrdre(ArrayList<Integer> pChiffrePossible, byte pNombreValeur) {
 		for(int i = 0; i < pNombreValeur; i++)
 		{
 			pChiffrePossible.add(i);

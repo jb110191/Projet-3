@@ -22,7 +22,7 @@ public class SelectionModes {
 	 * Méthode
 	 */
 	// Méthode pour choissir le mode de jeux grace à un switch qui appelle la méthode mode de jeu pour séléctionner le mode qui appellera le jeux en lui même
-	static void choixModes(int jeux) {
+	void choixModes(int jeux) {
 		// Déclaration des variables
 		int choix = 0;
 		
@@ -30,6 +30,10 @@ public class SelectionModes {
 		// Switch pour le choix du jeux
 		// Création d'un Scanner pour récupérer le choix puis sa fermeture
 		Scanner clavier = new Scanner(System.in);
+		
+		// On créer un instance de RecherchePlusMoins et de Mastermind
+		RecherchePlusMoins rpm = new RecherchePlusMoins();
+		Mastermind mtm = new Mastermind();
 		
 		// Test
 		try
@@ -56,22 +60,22 @@ public class SelectionModes {
 				switch(((jeux - 1) * 3) + choix)
 				{
 				case 1 :
-					RecherchePlusMoins.Challenger();
+					rpm.Challenger();
 					break;
 				case 2 :
-					RecherchePlusMoins.Defenseur();
+					rpm.Defenseur();
 					break;
 				case 3 :
-					RecherchePlusMoins.Duel();
+					rpm.Duel();
 					break;
 				case 4 :
-					Mastermind.Challenger();
+					mtm.Challenger();
 					break;
 				case 5 :
-					Mastermind.Defenseur();
+					mtm.Defenseur();
 					break;
 				case 6 :
-					Mastermind.Duel();
+					mtm.Duel();
 					break;
 				default :
 					System.out.println("Choisis une nombre valide, y a pas de mode de jeux caché");
