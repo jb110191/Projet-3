@@ -50,6 +50,17 @@ public class Mastermind {
 		// Génération d'une combinaison
 		monAbc.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
 		
+		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		{
+			System.out.print("Mode debug");
+			System.out.print("La combinaison est ");
+			for(int i = 0; i < combinaisonIA.length; i++)
+			{
+				System.out.print(combinaisonIA[i]);
+			}
+			System.out.println();
+		}
+		
 		// Le joueur cherche la combinaison de l'IA
 		do
 		{		
@@ -192,7 +203,7 @@ public class Mastermind {
 		
 		// On initialise listePossible
 		monAbc.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
-				
+
 		/*
 		 * Log
 		 * pour vérifier les combinaisons dans listesPossibles
@@ -235,6 +246,17 @@ public class Mastermind {
 		
 		// Génération d'une combinaison
 		monAbc.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
+		
+		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		{
+			System.out.print("Mode debug");
+			System.out.print("La combinaison est ");
+			for(int i = 0; i < combinaisonIA.length; i++)
+			{
+				System.out.print(combinaisonIA[i]);
+			}
+			System.out.println();
+		}
 		
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
 		if(monAbc.zeroUn() == 1)

@@ -53,6 +53,17 @@ public class RecherchePlusMoins {
 		// Génération d'une combinaison
 		monAbc.genereCombinaison(combinaisonIA);
 		
+		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		{
+			System.out.print("Mode debug");
+			System.out.print("La combinaison est ");
+			for(int i = 0; i < combinaisonIA.length; i++)
+			{
+				System.out.print(combinaisonIA[i]);
+			}
+			System.out.println();
+		}
+		
 		// Le joueur cherche la combinaison de l'IA
 		do
 		{
@@ -155,6 +166,17 @@ public class RecherchePlusMoins {
 		System.out.print("\t\t");
 		monAbc.lisCombinaison(combinaisonJoueur);
 		System.out.println();
+		
+		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		{
+			System.out.print("Mode debug");
+			System.out.print("La combinaison est ");
+			for(int i = 0; i < combinaisonIA.length; i++)
+			{
+				System.out.print(combinaisonIA[i]);
+			}
+			System.out.println();
+		}
 		
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
 		if(monAbc.zeroUn() == 1)

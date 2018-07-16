@@ -216,18 +216,28 @@ public class Abc {
 		// Déclaration de variable
 		Scanner clavier = new Scanner(System.in);
 		short entreeUtilisateur = 0;
-				
-		try
+		
+		Boolean estShort = false;
+		
+		while(estShort != true)
 		{
-			// Récupération d'une entrée utilisateur
-			entreeUtilisateur = clavier.nextShort();
-			return entreeUtilisateur;
+			try
+			{
+				// Récupération d'une entrée utilisateur
+				entreeUtilisateur = clavier.nextShort();
+				estShort = true;
+			}
+			catch(InputMismatchException e)
+			{
+				System.out.println("What");
+				LogOutil.LOGGER.trace("InputMismatchException -> " + e.getMessage());
+				clavier.next();
+				System.out.println("Veuillez entrer une valeur valide");
+			}
 		}
-		catch(InputMismatchException e)
-		{
-			clavier.next();
-			return 0;
-		}
+		
+		// On retourne un short
+		return entreeUtilisateur;
 	}
 	
 	// Génère une combianaison
@@ -263,19 +273,9 @@ public class Abc {
 	}
 	
 	public void reglageListePossible(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, int pTailleCombinaison, byte pNombreValeur) {		
-		/*
-		 * Pour avoir plus tard  une liste avec les chiffres dans le désordre
-		 * Créer une ArrayList d'Integer listeHasard avec les chiffres au hasard
-		 * Remplacer
-		 * 		les "listeTampon.add(0);" par "listeTampon.add(listeHasard.get(0));"
-		 * 		et les "listeTampon.add(unNombre);" par "listeTampon.add(listeHasard.get(unNombre));"
-		 */
-
-		/*
-		 * Test
-		 */
-		//reglageListeHasard(pChiffrePossible, pNombreValeur);
-		reglageListeOrdre(pChiffrePossible, pNombreValeur);
+		
+		//On met les chiffres dans un ordre aléatoire
+		reglageListeHasard(pChiffrePossible, pNombreValeur);
 		
 		for(int i = 0; i < Math.pow(pNombreValeur, pTailleCombinaison); i++)
 		{
