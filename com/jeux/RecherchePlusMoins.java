@@ -4,11 +4,11 @@ package com.jeux;
 import com.abc.*;
 import com.logoutil.*;
 
-public class RecherchePlusMoins {
+public class RecherchePlusMoins implements Jeux {
 	/*
 	 * Variable de classe
 	 */
-	static Abc monAbc = new Abc();
+	//
 	
 	/*
 	 * Constructeur
@@ -18,9 +18,6 @@ public class RecherchePlusMoins {
 	/*
 	 * Méthode
 	 */
-	
-	
-	
 	// Méthode des modes de jeux
 	
 	/*
@@ -55,7 +52,7 @@ public class RecherchePlusMoins {
 		
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
-			System.out.print("Mode debug");
+			System.out.println("Mode debug");
 			System.out.print("La combinaison est ");
 			for(int i = 0; i < combinaisonIA.length; i++)
 			{
@@ -169,7 +166,7 @@ public class RecherchePlusMoins {
 		
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
-			System.out.print("Mode debug");
+			System.out.println("Mode debug");
 			System.out.print("La combinaison est ");
 			for(int i = 0; i < combinaisonIA.length; i++)
 			{

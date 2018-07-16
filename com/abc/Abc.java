@@ -200,7 +200,7 @@ public class Abc {
 	 */
 	public void lisCombinaison(byte pNombre[]) {
 		// Déclaration de variable
-		short entreeUtilisateur = 0;
+		int entreeUtilisateur = 0;
 		entreeUtilisateur = entree();
 		
 		// Convertion en un tableaux de byte de l'entrée
@@ -212,10 +212,10 @@ public class Abc {
 	}
 	
 	// Récupère un entrée de l'utilisateur
-	public short entree() {
+	public int entree() {
 		// Déclaration de variable
 		Scanner clavier = new Scanner(System.in);
-		short entreeUtilisateur = 0;
+		int entreeUtilisateur = 0;
 		
 		Boolean estShort = false;
 		
@@ -224,12 +224,11 @@ public class Abc {
 			try
 			{
 				// Récupération d'une entrée utilisateur
-				entreeUtilisateur = clavier.nextShort();
+				entreeUtilisateur = clavier.nextInt();
 				estShort = true;
 			}
 			catch(InputMismatchException e)
 			{
-				System.out.println("What");
 				LogOutil.LOGGER.trace("InputMismatchException -> " + e.getMessage());
 				clavier.next();
 				System.out.println("Veuillez entrer une valeur valide");
@@ -322,4 +321,28 @@ public class Abc {
 		pMesNouvellesVariables.valide = 0;
 		pMesNouvellesVariables.malPlace = 0;
 	}
+
+	public Boolean demande() {
+		System.out.println("\t0 - Non");
+		System.out.println("\t1 - Oui");
+		if(entree() == 1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public Boolean demandeRejouer() {
+		System.out.println("Veux-tu rejouer ?");
+		return demande();
+	}
+	
+	public Boolean demandeAutreJeux() {
+		System.out.println("Veux-tu changer de jeux ?");
+		return demande();
+	}
+
 }

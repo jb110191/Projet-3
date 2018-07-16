@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import com.abc.*;
 import com.logoutil.*;
 
-public class Mastermind {
+public class Mastermind implements Jeux {
 	/*
 	 * Variable de classe
 	 */
-	static Abc monAbc = new Abc();
+	//
 	
 	/*
 	 * Constructeur
@@ -19,7 +19,6 @@ public class Mastermind {
 	/*
 	 * Méthode
 	 */
-	
 	// Méthode des modes de jeux
 	
 	/*
@@ -52,7 +51,7 @@ public class Mastermind {
 		
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
-			System.out.print("Mode debug");
+			System.out.println("Mode debug");
 			System.out.print("La combinaison est ");
 			for(int i = 0; i < combinaisonIA.length; i++)
 			{
@@ -92,8 +91,8 @@ public class Mastermind {
 		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe Mastermind.");
 		
 		// Déclaration de variable
-		byte combinaisonJoueur[] = new byte[4];
-		byte proposition[] = new byte[4];	
+		byte combinaisonJoueur[] = new byte[6];
+		byte proposition[] = new byte[6];	
 		
 		MastermindVariable mesNouvellesVariables = new MastermindVariable();
 		MastermindVariable mesAnciennesVariables = new MastermindVariable();
@@ -249,7 +248,7 @@ public class Mastermind {
 		
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
-			System.out.print("Mode debug");
+			System.out.println("Mode debug");
 			System.out.print("La combinaison est ");
 			for(int i = 0; i < combinaisonIA.length; i++)
 			{

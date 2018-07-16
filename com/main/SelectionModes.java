@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.logoutil.*;
-
+import com.abc.Abc;
 import com.jeux.*;
 
 public class SelectionModes {
@@ -12,6 +12,8 @@ public class SelectionModes {
 	 * Variable de classe
 	 */
 	//
+	static Abc monAbc = new Abc();
+
 	
 	/*
 	 * Constructeur
@@ -22,75 +24,54 @@ public class SelectionModes {
 	 * Méthode
 	 */
 	// Méthode pour choissir le mode de jeux grace à un switch qui appelle la méthode mode de jeu pour séléctionner le mode qui appellera le jeux en lui même
-	void choixModes(int jeux) {
+	void choixModes(Jeux pMonJeux) {
 		// Déclaration des variables
 		int choix = 0;
+		Boolean rejouer = false;
 		
 		//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
 		// Switch pour le choix du jeux
 		// Création d'un Scanner pour récupérer le choix puis sa fermeture
 		Scanner clavier = new Scanner(System.in);
 		
-		// On créer un instance de RecherchePlusMoins et de Mastermind
-		RecherchePlusMoins rpm = new RecherchePlusMoins();
-		Mastermind mtm = new Mastermind();
-		
-		// Test
-		try
+		do
 		{
-			do
+			//Affichage du choix à chaque boucle
+			System.out.println("Choisis le mode");
+			System.out.println("\t1 - Challenger");
+			System.out.println("\t2 - Défenseur");
+			System.out.println("\t3 - Duel");
+
+			// Récupération du choix
+			choix = monAbc.entree();
+
+			switch(choix)
 			{
-				//Affichage du choix à chaque boucle
-				System.out.print("Choisis le mode pour ");
-				if(jeux == 1)
+			case 1 :
+				do
 				{
-					System.out.println("le Recherche + ou -");
-				}
-				else if(jeux == 2)
+					pMonJeux.Challenger();
+					rejouer = monAbc.demandeRejouer();
+				}while(rejouer != false);
+				break;
+			case 2 :
+				do
 				{
-					System.out.println("le Mastermind");
-				}
-				System.out.println("\t1 - Challenger");
-				System.out.println("\t2 - Défenseur");
-				System.out.println("\t3 - Duel");
-				
-				// Récupération du choix
-				choix = clavier.nextInt();
-
-				switch(((jeux - 1) * 3) + choix)
+					pMonJeux.Defenseur();
+					rejouer = monAbc.demandeRejouer();
+				}while(rejouer != false);
+				break;
+			case 3 :
+				do
 				{
-				case 1 :
-					rpm.Challenger();
-					break;
-				case 2 :
-					rpm.Defenseur();
-					break;
-				case 3 :
-					rpm.Duel();
-					break;
-				case 4 :
-					mtm.Challenger();
-					break;
-				case 5 :
-					mtm.Defenseur();
-					break;
-				case 6 :
-					mtm.Duel();
-					break;
-				default :
-					System.out.println("Choisis une nombre valide, y a pas de mode de jeux caché");
-					break;
-				}
-
-			}while(choix != 1 && choix != 2 && choix != 3);
-		}
-		
-		// Exeception
-		catch(InputMismatchException e)
-		{
-			// Affichage de l'erreur
-			LogOutil.LOGGER.trace(e.getStackTrace());
-			clavier.close();
-		}
+					pMonJeux.Duel();
+					rejouer = monAbc.demandeRejouer();
+				}while(rejouer != false);
+				break;
+			default :
+				System.out.println("Choisis une nombre valide, y a pas de mode de jeux caché");
+				break;
+			}
+		}while(choix != 1 && choix != 2 && choix != 3);
 	}
 }

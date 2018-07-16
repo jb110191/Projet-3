@@ -3,6 +3,10 @@ package com.main;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.abc.Abc;
+import com.jeux.Jeux;
+import com.jeux.Mastermind;
+import com.jeux.RecherchePlusMoins;
 import com.logoutil.*;
 /**
  * 
@@ -14,6 +18,7 @@ public class SelectionJeux {
 	 * Variable de classe
 	 */
 	//
+	static Abc monAbc = new Abc();
 	
 	/*
 	 * Constructeur
@@ -27,6 +32,9 @@ public class SelectionJeux {
 	void choixJeux() {
 		// Déclaration des variables
 		int choix = 0;
+		Boolean rejouer = false;
+		
+		Jeux monJeux;
 		
 		//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
 		// Switch pour le choix du jeux
@@ -36,8 +44,7 @@ public class SelectionJeux {
 		// On crée une instance de SelectionModes
 		SelectionModes slctMd = new SelectionModes();
 		
-		// Test
-		try
+		do
 		{
 			do
 			{
@@ -45,31 +52,37 @@ public class SelectionJeux {
 				System.out.println("Choisis le jeux");
 				System.out.println("\t1 - Recherche +/-");
 				System.out.println("\t2 - Mastermind");
-				
+
 				// Récupération du choix
-				choix = clavier.nextInt();
+				choix = monAbc.entree();
 
 				if(choix != 1 && choix != 2)
 				{
 					System.out.println("Choisis une nombre valide, y a pas de jeux caché");
 				}
-
 			}while(choix != 1 && choix != 2);
-			
+
+			// On créer un instance de RecherchePlusMoins ou de Mastermind
+			if(choix == 1)
+			{
+				monJeux = new RecherchePlusMoins();
+			}
+			else
+			{
+				monJeux = new Mastermind();
+			}
+
 			// On appelle la méthode choixJeux
-			slctMd.choixModes(choix);
-			
-			// Affichage de la sortie du programme
-			System.out.println();
-			System.out.println("J'espère que le jeux t'as amusé.");
-		}
+			slctMd.choixModes(monJeux);
+			rejouer = monAbc.demandeAutreJeux();
+		}while(rejouer != false);
+
+		// Affichage de la sortie du programme
+		System.out.println();
+		System.out.println("J'espère que le jeux t'as amusé.");
 		
-		// Exeception
-		catch(InputMismatchException e)
-		{
-			// Affichage de l'erreur
-			LogOutil.LOGGER.trace(e.getStackTrace());
-			clavier.close();
-		}
+		// On ferme le Scanner qu'on utilisera plus
+		clavier.close();
 	}
 }
+
