@@ -144,9 +144,9 @@ public class Mastermind implements Jeux {
 		System.out.println();
 		
 		// On demande au joueur de rentrer un combinaison
-		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres.");
+		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + "." );
 		System.out.print("\t\t");
-		mesMethodesOutils.lisCombinaison(combinaisonJoueur, nombreValeur);
+		mesMethodesOutils.lisCombinaison(combinaisonJoueur, nombreValeur - 1);
 		System.out.println();
 		
 		// L'IA cherche la combinaison du joueur
@@ -242,9 +242,9 @@ public class Mastermind implements Jeux {
 		System.out.println();
 		
 		// On demande au joueur de rentrer un combinaison
-		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres.");
+		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + "." );
 		System.out.print("\t\t");
-		mesMethodesOutils.lisCombinaison(combinaisonJoueur, nombreValeur);
+		mesMethodesOutils.lisCombinaison(combinaisonJoueur, nombreValeur - 1);
 		System.out.println();
 		
 		// Génération d'une combinaison
@@ -338,7 +338,7 @@ public class Mastermind implements Jeux {
 
 		// Lis l'entrée de l'utilisateur
 		System.out.print("\t\tLe joueur propose ");
-		mesMethodesOutils.lisCombinaison(pProposition, pNombreValeur);
+		mesMethodesOutils.lisCombinaison(pProposition, pNombreValeur - 1);
 
 		// On affiche la réponse à la proposition du joueur
 		System.out.print("\t\tRéponse ");

@@ -103,7 +103,7 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 		
 		// On demande au joueur de rentrer un combinaison
-		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres.");
+		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9." );
 		System.out.print("\t\t");
 		mesMethodesOutils.lisCombinaison(combinaisonJoueur, 9);
 		System.out.println();
@@ -157,7 +157,7 @@ public class RecherchePlusMoins implements Jeux {
 		mesMethodesOutils.genereCombinaison(combinaisonIA);
 		
 		// On demande au joueur de rentrer un combinaison
-		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres.");
+		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9." );
 		System.out.print("\t\t");
 		mesMethodesOutils.lisCombinaison(combinaisonJoueur, 9);
 		System.out.println();
