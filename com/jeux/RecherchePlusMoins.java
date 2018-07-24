@@ -1,8 +1,6 @@
 package com.jeux;
 
-
-import com.abc.*;
-import com.logoutil.*;
+import com.logoutil.LogOutil;
 
 public class RecherchePlusMoins implements Jeux {
 	/*

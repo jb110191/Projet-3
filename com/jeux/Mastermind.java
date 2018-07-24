@@ -113,11 +113,13 @@ public class Mastermind implements Jeux {
 		 */
 		if(LogOutil.LOGGER.isTraceEnabled() == true)
 		{
-			String str = "La listes des combinaisons";
-			
+			String str = "La listes des ";
+			str += listesPossibles.size();
+			str += " combinaisons";
+
 			for(int i = 0; i < listesPossibles.size(); i++)
 			{
-				if((i % (Math.pow(nombreValeur, 2))) == 0)
+				if((i % 20) == 0)
 				{
 					str += "\n\t\t";
 				}
@@ -209,11 +211,13 @@ public class Mastermind implements Jeux {
 		 */
 		if(LogOutil.LOGGER.isTraceEnabled() == true)
 		{
-			String str = "La listes des combinaisons";
+			String str = "La listes des ";
+			str += listesPossibles.size();
+			str += " combinaisons";
 					
 			for(int i = 0; i < listesPossibles.size(); i++)
 			{
-				if((i % (Math.pow(nombreValeur, 2))) == 0)
+				if((i % 20) == 0)
 				{
 					str += "\n\t\t";
 				}
@@ -382,32 +386,19 @@ public class Mastermind implements Jeux {
 	}
 	
 	protected void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
-		
-		/*
-		 * Tableau des combinaison possible ?
-		 * 
-		 * Liste des précedentes porposition ?
-		 * Liste des précédentes valide et malPlace ?
-		 */
 		// Déclaration de variable
 		if(pCoups != 1)
 		{
-			// On supprime la combinaison que l'on à testé précedement
-			/*
-			 * Pas directement il le faut pur comparer avec les valide et malPlace 
-			 * pListesPossibles.remove(0);
-			*/
-			
-			/*
-			System.out.println("if(pChiffreTrouve.size() != pCombinaisonJoueur.length)");
-			System.out.println("if(" + pChiffreTrouve.size() + " != " + pCombinaisonJoueur.length + ")");
-			*/
-			
 			if(pChiffreTrouve.size() != pCombinaisonJoueur.length)
 			{				
 				// On crée un variable pour une boucle
 				int nombreNouveauxIndices = (pMesNouvellesVariables.valide + pMesNouvellesVariables.malPlace) - (pMesAnciennesVariables.valide + pMesAnciennesVariables.malPlace);
 				int nombreIndiceCombinaison = 0;
+				
+				/*
+				 * Test
+				 */
+				LogOutil.LOGGER.trace("pChiffrePossible.size() = " + pChiffrePossible.size());
 				
 				// On déroule les valeurs dans la liste des possibles
 				for(int i = 0; i < pListesPossibles.size(); i++)
@@ -422,28 +413,28 @@ public class Mastermind implements Jeux {
 							nombreIndiceCombinaison++;
 						}
 					}
-					
-					/*
-					 * Log
-					 */
-					if(LogOutil.LOGGER.isTraceEnabled() == true)
-					{
-						String str = "";
-						for(int j = 0; j < pListesPossibles.get(i).size(); j++)
-						{
-							str += pListesPossibles.get(i).get(j);
-						}
-						LogOutil.LOGGER.trace("La combinaison " + str + "\nElle a " + nombreIndiceCombinaison + " fois la valeur et il faut exactement " + nombreNouveauxIndices + " fois la valeur pour rester dans la listes des possibles.");
-					}
-					
+									
 					// Si nombreIndiceCombinaison est différent de nombreNouveauxIndices ont retire la combinaison
 					if(nombreIndiceCombinaison != nombreNouveauxIndices)
 					{
-						/*
-						 * Log
-						 */
-						LogOutil.LOGGER.trace("La combinaison est supprimé");
 						
+						if(LogOutil.LOGGER.isTraceEnabled() == true)
+						{
+							String str = "La combinaisons ";
+							
+							for(int j = 0; j < pListesPossibles.get(i).size(); j++)
+							{
+								str += pListesPossibles.get(i).get(j);
+							}
+							str += " est suprimmé car elle a ";
+							str += nombreIndiceCombinaison;
+							str += " chiffre(s) _";
+							str += pChiffrePossible.get(0);
+							str += "_ au lieux de ";
+							str += nombreNouveauxIndices;
+							str += ".";
+							LogOutil.LOGGER.trace(str);
+						}
 						pListesPossibles.remove(i);
 						i--;
 					}
@@ -454,6 +445,34 @@ public class Mastermind implements Jeux {
 				}
 				// On supprime le chiffre qui a été testé
 				pChiffrePossible.remove(0);
+			}
+			
+			/*
+			 * Log
+			 * pour vérifier les combinaisons dans listesPossibles
+			 */
+			if(LogOutil.LOGGER.isTraceEnabled() == true)
+			{
+				String str = "La listes des ";
+				str += pListesPossibles.size();
+				str += " combinaisons";
+				
+				for(int i = 0; i < pListesPossibles.size(); i++)
+				{
+					if((i % 20) == 0)
+					{
+						str += "\n\t\t";
+					}
+					else
+					{
+						str += " - ";
+					}
+					for(int j = 0; j < pListesPossibles.get(i).size(); j++)
+					{
+						str += pListesPossibles.get(i).get(j);
+					}
+				}
+				LogOutil.LOGGER.trace(str);
 			}
 		}
 		

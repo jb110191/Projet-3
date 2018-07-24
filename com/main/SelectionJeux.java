@@ -1,18 +1,16 @@
 package com.main;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import com.abc.Abc;
 import com.jeux.Jeux;
 import com.jeux.Mastermind;
 import com.jeux.RecherchePlusMoins;
-import com.logoutil.*;
+
 /**
  * 
  * @author Julian
  *
  */
+
 public class SelectionJeux {
 	/*
 	 * Variable de classe
@@ -38,8 +36,6 @@ public class SelectionJeux {
 		
 		//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
 		// Switch pour le choix du jeux
-		// Création d'un Scanner pour récupérer le choix puis sa fermeture
-		Scanner clavier = new Scanner(System.in);
 		
 		// On crée une instance de SelectionModes
 		SelectionModes slctMd = new SelectionModes();
@@ -80,9 +76,6 @@ public class SelectionJeux {
 		// Affichage de la sortie du programme
 		System.out.println();
 		System.out.println("J'espère que le jeux t'as amusé.");
-		
-		// On ferme le Scanner qu'on utilisera plus
-		clavier.close();
 	}
 }
 

@@ -44,23 +44,22 @@ public class Abc {
 	// Affiche la réponse du Mastemind et renvoie le nombre de chiffre de la combinaison qui sont bon
 	public byte afficheReponseM(byte pCombinaison[], byte pProposition[]) {
 		// Déclaration de variable
-		byte valide = 0;
-		byte malPlace = 0;
-		
-		ArrayList<Integer> liste = new ArrayList<Integer>();
-		boolean dansLaListe = false;
+		MastermindVariable indice = new MastermindVariable();
+		boolean tabIndice[] = new boolean[pCombinaison.length];
+
+		// On initialise les valeur à faux
+		for(int i = 0; i < tabIndice.length; i++)
+		{
+			tabIndice[i] = false;
+		}
 
 		for(int i = 0; i < pCombinaison.length; i++)
-		{
+		{			
 			// On vérifie si un chiffre de la proposition est bonne
 			if(pProposition[i] == pCombinaison[i])
 			{
-				/*
-				 * Logs pas clair
-				 */
-				// Log
-				LogOutil.LOGGER.trace("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
-				valide++;
+				indice.valide++;
+				tabIndice[i] = true;
 			}
 			// Sinon
 			else
@@ -68,66 +67,37 @@ public class Abc {
 				for(int j = 0;  j < pCombinaison.length; j++)
 				{
 					// On vérifie si un chiffre de la proposition est dans la combinaison 
-					if(pProposition[i] == pCombinaison[j])
+					if(pProposition[i] == pCombinaison[j] && pProposition[j] != pCombinaison[j] && tabIndice[j] == false)
 					{
-						// Log
-						LogOutil.LOGGER.trace("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
-						
-						/*
-						 * On verifie que le nième chiffre de la proposition n'est pas égale au nième chiffre de la combinaison
-						 * car si un nième chiffre de la proposition est égale au nième chiffre de la combinaison
-						 * c'est l'affaire du premier if avant le else
-						 */
-						if(pProposition[j] != pCombinaison[j])
-						{
-							// Log
-							LogOutil.LOGGER.trace("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
-							
-							// On met faux dans dansLaListe avant de faire défiller la liste 
-							dansLaListe = false;
-							for(int k = 0; k < liste.size(); k++)
-							{
-								// Et enfin si le chiffre est dans la liste des chiffres on met vrai dans dansLaListe
-								if(liste.get(k) == pProposition[i])
-								{
-									// Log
-									LogOutil.LOGGER.trace("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
-									dansLaListe = true;									
-								}
-							}
-							// Si dans la liste est faux on ajoute le chiffre de la proposition à la liste et on ajoute 1 à malPlace 
-							if(dansLaListe == false)
-							{
-								// Log
-								LogOutil.LOGGER.trace("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
-								liste.add((int)pProposition[i]);
-								malPlace++;
-							}
-						}
+						indice.malPlace++;
+						tabIndice[j] = true;
 					}
 				}
 			}
-		}
-		System.out.println("Il y a " + valide + " chiffres bien placé et " + malPlace + " mal placé.");
+		}		
+		System.out.println("Il y a " + indice.valide + " chiffres bien placé et " + indice.malPlace + " mal placé.");
 
-		return valide;
+		return indice.valide;
 	}
 	
 	// Affiche la réponse du Mastemind et renvoie le nombre de chiffre de la combinaison qui sont bon
 	public void afficheReponseM(byte pCombinaison[], byte pProposition[], MastermindVariable pMesNouvellesVariables) {
 		// Déclaration de variable
-			
-		ArrayList<Integer> liste = new ArrayList<Integer>();
-		boolean dansLaListe = false;
+		boolean tabIndice[] = new boolean[pCombinaison.length];
+		
+		// On initialise les valeur à faux
+		for(int i = 0; i < tabIndice.length; i++)
+		{
+			tabIndice[i] = false;
+		}
 
 		for(int i = 0; i < pCombinaison.length; i++)
-		{
+		{			
 			// On vérifie si un chiffre de la proposition est bonne
 			if(pProposition[i] == pCombinaison[i])
 			{
-				// Log
-				LogOutil.LOGGER.trace("Test A pProposition[i] == pCombinaison[i] -> pProposition[" + i + "] == pCombinaison[" + i + "] -> " + pProposition[i] + " == " + pCombinaison[i] + ".");
-				pMesNouvellesVariables.valide++;;
+				pMesNouvellesVariables.valide++;
+				tabIndice[i] = true;
 			}
 			// Sinon
 			else
@@ -135,42 +105,10 @@ public class Abc {
 				for(int j = 0;  j < pCombinaison.length; j++)
 				{
 					// On vérifie si un chiffre de la proposition est dans la combinaison 
-					if(pProposition[i] == pCombinaison[j])
+					if(pProposition[i] == pCombinaison[j] && pProposition[j] != pCombinaison[j] && tabIndice[j] == false)
 					{
-						// Log
-						LogOutil.LOGGER.trace("Test B pProposition[i] == pCombinaison[j] -> pProposition[" + i + "] == pCombinaison[" + j + "] -> " + pProposition[i] + " == " + pCombinaison[j] + ".");
-						
-						/*
-						 * On verifie que le nième chiffre de la proposition n'est pas égale au nième chiffre de la combinaison
-						 * car si un nième chiffre de la proposition est égale au nième chiffre de la combinaison
-						 * c'est l'affaire du premier if avant le else
-						 */
-						if(pProposition[j] != pCombinaison[j])
-						{
-							// Log
-							LogOutil.LOGGER.trace("Test C pProposition[j] != pCombinaison[j] -> pProposition[" + j + "] != pCombinaison[" + j + "] -> " + pProposition[j] + " != " + pCombinaison[j] + ".");
-							
-							// On met faux dans dansLaListe avant de faire défiller la liste 
-							dansLaListe = false;
-							for(int k = 0; k < liste.size(); k++)
-							{
-								// Et enfin si le chiffre est dans la liste des chiffres on met vrai dans dansLaListe
-								if(liste.get(k) == pProposition[i])
-								{
-									// Log
-									LogOutil.LOGGER.trace("Test D liste.get(k) == pProposition[i] -> liste.get(" + k + ") == pProposition[" + i + "] -> " + liste.get(k) + " == " + pProposition[i] + ".");
-									dansLaListe = true;									
-								}
-							}
-							// Si dans la liste est faux on ajoute le chiffre de la proposition à la liste et on ajoute 1 à malPlace 
-							if(dansLaListe == false)
-							{
-								// Log
-								LogOutil.LOGGER.trace("Test E dansLaListe == false -> " + dansLaListe + " == " + false + ".");
-								liste.add((int)pProposition[i]);
-								pMesNouvellesVariables.malPlace++;
-							}
-						}
+						pMesNouvellesVariables.malPlace++;
+						tabIndice[j] = true;
 					}
 				}
 			}
@@ -273,8 +211,15 @@ public class Abc {
 	
 	public void reglageListePossible(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, int pTailleCombinaison, byte pNombreValeur) {		
 		
-		//On met les chiffres dans un ordre aléatoire
-		reglageListeHasard(pChiffrePossible, pNombreValeur);
+		//On met les chiffres dans un ordre
+		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		{
+			reglageListeOrdre(pChiffrePossible, pNombreValeur);
+		}
+		else
+		{
+			reglageListeHasard(pChiffrePossible, pNombreValeur);
+		}
 		
 		for(int i = 0; i < Math.pow(pNombreValeur, pTailleCombinaison); i++)
 		{

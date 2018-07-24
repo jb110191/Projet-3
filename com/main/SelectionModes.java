@@ -1,11 +1,7 @@
 package com.main;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
-import com.logoutil.*;
 import com.abc.Abc;
-import com.jeux.*;
+import com.jeux.Jeux;
 
 public class SelectionModes {
 	/*
@@ -31,8 +27,6 @@ public class SelectionModes {
 		
 		//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
 		// Switch pour le choix du jeux
-		// Création d'un Scanner pour récupérer le choix puis sa fermeture
-		Scanner clavier = new Scanner(System.in);
 		
 		do
 		{
