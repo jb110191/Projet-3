@@ -1,9 +1,9 @@
 package com.main;
 
-import com.abc.Abc;
 import com.jeux.Jeux;
 import com.jeux.Mastermind;
 import com.jeux.RecherchePlusMoins;
+import com.outils.MethodesOutils;
 
 /**
  * 
@@ -16,7 +16,7 @@ public class SelectionJeux {
 	 * Variable de classe
 	 */
 	//
-	static Abc monAbc = new Abc();
+	static MethodesOutils monAbc = new MethodesOutils();
 	
 	/*
 	 * Constructeur
@@ -42,19 +42,19 @@ public class SelectionJeux {
 		
 		do
 		{
+			//Affichage du choix à chaque boucle
+			System.out.println("Choisis le jeux");
+			System.out.println("\t1 - Recherche +/-");
+			System.out.println("\t2 - Mastermind");
+			
 			do
 			{
-				//Affichage du choix à chaque boucle
-				System.out.println("Choisis le jeux");
-				System.out.println("\t1 - Recherche +/-");
-				System.out.println("\t2 - Mastermind");
-
 				// Récupération du choix
-				choix = monAbc.entree();
+				choix = monAbc.lisEntree(1, 2);
 
 				if(choix != 1 && choix != 2)
 				{
-					System.out.println("Choisis une nombre valide, y a pas de jeux caché");
+					System.out.println("Veuillez entrer une valeur valide");
 				}
 			}while(choix != 1 && choix != 2);
 

@@ -46,7 +46,7 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 
 		// Génération d'une combinaison
-		monAbc.genereCombinaison(combinaisonIA);
+		mesMethodesOutils.genereCombinaison(combinaisonIA);
 		
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
@@ -92,7 +92,7 @@ public class RecherchePlusMoins implements Jeux {
 		int coups = 0;
 		
 		// On règle les valeurs minimals et maximals de la combinaison
-		monAbc.reglageMinMax(min, max);
+		mesMethodesOutils.reglageMinMax(min, max);
 		
 		/*
 		 * A mettre dans selection de jeux ?
@@ -105,7 +105,7 @@ public class RecherchePlusMoins implements Jeux {
 		// On demande au joueur de rentrer un combinaison
 		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres.");
 		System.out.print("\t\t");
-		monAbc.lisCombinaison(combinaisonJoueur);
+		mesMethodesOutils.lisCombinaison(combinaisonJoueur, 9);
 		System.out.println();
 		
 		// L'IA cherche la combinaison du joueur
@@ -143,7 +143,7 @@ public class RecherchePlusMoins implements Jeux {
 		int coups = 0;
 		
 		// On règle les valeurs minimals et maximals de la combinaison
-		monAbc.reglageMinMax(min, max);
+		mesMethodesOutils.reglageMinMax(min, max);
 		
 		/*
 		 * A mettre dans selection de jeux ?
@@ -154,12 +154,12 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 		
 		// La combinaison de l'IA est gèneré et on en demande une au joueur
-		monAbc.genereCombinaison(combinaisonIA);
+		mesMethodesOutils.genereCombinaison(combinaisonIA);
 		
 		// On demande au joueur de rentrer un combinaison
 		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres.");
 		System.out.print("\t\t");
-		monAbc.lisCombinaison(combinaisonJoueur);
+		mesMethodesOutils.lisCombinaison(combinaisonJoueur, 9);
 		System.out.println();
 		
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
@@ -174,7 +174,7 @@ public class RecherchePlusMoins implements Jeux {
 		}
 		
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
-		if(monAbc.zeroUn() == 1)
+		if(mesMethodesOutils.zeroUn() == 1)
 		{
 			System.out.println("Le joueur joue en premier.");
 			System.out.println();
@@ -236,11 +236,11 @@ public class RecherchePlusMoins implements Jeux {
 		
 		// Lis l'entrée de l'utilisateur
 		System.out.print("\t\tLe joueur propose ");
-		monAbc.lisCombinaison(pProposition);	
+		mesMethodesOutils.lisCombinaison(pProposition, 9);	
 			
 		// On affiche la réponse à la proposition du joueur
 		System.out.print("\t\tRéponse ");
-		return monAbc.afficheReponseR(pCombinaisonIA, pProposition);
+		return mesMethodesOutils.afficheReponseR(pCombinaisonIA, pProposition);
 	}
 	
 	protected byte tourIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
@@ -252,12 +252,12 @@ public class RecherchePlusMoins implements Jeux {
 		
 		// On affiche la proposition de l'IA
 		System.out.print("\t\tL'IA propose ");
-		monAbc.afficheCombinaison(pProposition);
+		mesMethodesOutils.afficheCombinaison(pProposition);
 		System.out.println("");
 		
 		// On affiche la réponse à la proposition de l'IA
 		System.out.print("\t\tRéponse ");
-		return monAbc.afficheReponseR(pCombinaisonJoueur, pProposition);
+		return mesMethodesOutils.afficheReponseR(pCombinaisonJoueur, pProposition);
 	}
 	
 	protected void joueIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {

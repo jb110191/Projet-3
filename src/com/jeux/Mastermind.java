@@ -2,8 +2,8 @@ package com.jeux;
 
 import java.util.ArrayList;
 
-import com.abc.*;
 import com.logoutil.*;
+import com.outils.*;
 
 public class Mastermind implements Jeux {
 	/*
@@ -47,7 +47,7 @@ public class Mastermind implements Jeux {
 		System.out.println();
 
 		// Génération d'une combinaison
-		monAbc.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
+		mesMethodesOutils.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
 		
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
@@ -74,7 +74,7 @@ public class Mastermind implements Jeux {
 			LogOutil.LOGGER.trace("Tour " + coups);
 			
 			// On appelle tourJoueur
-			valideJoueur = tourJoueur(combinaisonIA, proposition);
+			valideJoueur = tourJoueur(combinaisonIA, proposition, nombreValeur);
 			
 			// On saute une ligne pour l'affichage
 			System.out.println();
@@ -91,13 +91,13 @@ public class Mastermind implements Jeux {
 		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe Mastermind.");
 		
 		// Déclaration de variable
-		byte combinaisonJoueur[] = new byte[6];
-		byte proposition[] = new byte[6];	
+		byte combinaisonJoueur[] = new byte[4];
+		byte proposition[] = new byte[4];	
 		
-		MastermindVariable mesNouvellesVariables = new MastermindVariable();
-		MastermindVariable mesAnciennesVariables = new MastermindVariable();
+		IndicesMastermind mesNouvellesVariables = new IndicesMastermind();
+		IndicesMastermind mesAnciennesVariables = new IndicesMastermind();
 		
-		byte nombreValeur = 6;
+		byte nombreValeur = 4;
 		int coups = 0;
 		
 		ArrayList <ArrayList <Integer>> listesPossibles = new ArrayList <ArrayList <Integer>>();
@@ -105,7 +105,7 @@ public class Mastermind implements Jeux {
 		ArrayList <Integer> chiffreTrouve = new ArrayList <Integer>();
 		
 		// On initialise listePossible
-		monAbc.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
+		mesMethodesOutils.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
 		
 		/*
 		 * Log
@@ -146,7 +146,7 @@ public class Mastermind implements Jeux {
 		// On demande au joueur de rentrer un combinaison
 		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres.");
 		System.out.print("\t\t");
-		monAbc.lisCombinaison(combinaisonJoueur);
+		mesMethodesOutils.lisCombinaison(combinaisonJoueur, nombreValeur);
 		System.out.println();
 		
 		// L'IA cherche la combinaison du joueur
@@ -195,15 +195,15 @@ public class Mastermind implements Jeux {
 		byte nombreValeur = 4;
 		int coups = 0;
 
-		MastermindVariable mesNouvellesVariables = new MastermindVariable();
-		MastermindVariable mesAnciennesVariables = new MastermindVariable();
+		IndicesMastermind mesNouvellesVariables = new IndicesMastermind();
+		IndicesMastermind mesAnciennesVariables = new IndicesMastermind();
 		
 		ArrayList <ArrayList <Integer>> listesPossibles = new ArrayList <ArrayList <Integer>>();
 		ArrayList <Integer> chiffrePossible = new ArrayList <Integer>();
 		ArrayList <Integer> chiffreTrouve = new ArrayList <Integer>();
 		
 		// On initialise listePossible
-		monAbc.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
+		mesMethodesOutils.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
 
 		/*
 		 * Log
@@ -244,11 +244,11 @@ public class Mastermind implements Jeux {
 		// On demande au joueur de rentrer un combinaison
 		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres.");
 		System.out.print("\t\t");
-		monAbc.lisCombinaison(combinaisonJoueur);
+		mesMethodesOutils.lisCombinaison(combinaisonJoueur, nombreValeur);
 		System.out.println();
 		
 		// Génération d'une combinaison
-		monAbc.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
+		mesMethodesOutils.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
 		
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
@@ -262,7 +262,7 @@ public class Mastermind implements Jeux {
 		}
 		
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
-		if(monAbc.zeroUn() == 1)
+		if(mesMethodesOutils.zeroUn() == 1)
 		{
 			System.out.println("Le joueur joue en premier.");
 			System.out.println();
@@ -279,7 +279,7 @@ public class Mastermind implements Jeux {
 				LogOutil.LOGGER.trace("Tour " + coups);
 				
 				// On appelle tourJoueur
-				valideJoueur = tourJoueur(combinaisonIA, proposition);
+				valideJoueur = tourJoueur(combinaisonIA, proposition, nombreValeur);
 				
 				// On appelle tourIA
 				tourIA(listesPossibles, chiffrePossible, chiffreTrouve, combinaisonJoueur, proposition, mesNouvellesVariables, mesAnciennesVariables, coups);
@@ -308,7 +308,7 @@ public class Mastermind implements Jeux {
 				tourIA(listesPossibles, chiffrePossible, chiffreTrouve, combinaisonJoueur, proposition, mesNouvellesVariables, mesAnciennesVariables, coups);
 				
 				// On appelle tourJoueur
-				valideJoueur = tourJoueur(combinaisonIA, proposition);
+				valideJoueur = tourJoueur(combinaisonIA, proposition, nombreValeur);
 				
 				// On saute une ligne pour l'affichage
 				System.out.println();
@@ -332,20 +332,20 @@ public class Mastermind implements Jeux {
 	}
 	
 	// Méthode de tour
-	protected byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
+	protected byte tourJoueur(byte pCombinaisonIA[], byte pProposition[], byte pNombreValeur) {
 		// Affichage du jeu
 		System.out.println("\tJoueur");
 
 		// Lis l'entrée de l'utilisateur
 		System.out.print("\t\tLe joueur propose ");
-		monAbc.lisCombinaison(pProposition);
+		mesMethodesOutils.lisCombinaison(pProposition, pNombreValeur);
 
 		// On affiche la réponse à la proposition du joueur
 		System.out.print("\t\tRéponse ");
-		return monAbc.afficheReponseM(pCombinaisonIA, pProposition);
+		return mesMethodesOutils.afficheReponseM(pCombinaisonIA, pProposition);
 	}
 	
-	protected void tourIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
+	protected void tourIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], IndicesMastermind pMesNouvellesVariables, IndicesMastermind pMesAnciennesVariables, int pCoups) {
 		// Affichage du jeu
 		System.out.println("\tIA");
 		
@@ -354,7 +354,7 @@ public class Mastermind implements Jeux {
 		
 		// On affiche la proposition de l'IA
 		System.out.print("\t\tL'IA propose ");
-		monAbc.afficheCombinaison(pProposition);
+		mesMethodesOutils.afficheCombinaison(pProposition);
 		System.out.println("");
 		
 		/*
@@ -378,14 +378,14 @@ public class Mastermind implements Jeux {
 		}
 		
 		// On déplace les valide et malPlace pour le prochain coup
-		monAbc.guereMastermindVariable(pMesNouvellesVariables, pMesAnciennesVariables);
+		mesMethodesOutils.guereMastermindVariable(pMesNouvellesVariables, pMesAnciennesVariables);
 		
 		// On affiche la réponse à la proposition de l'IA
 		System.out.print("\t\tRéponse ");
-		monAbc.afficheReponseM(pCombinaisonJoueur, pProposition, pMesNouvellesVariables);
+		mesMethodesOutils.afficheReponseM(pCombinaisonJoueur, pProposition, pMesNouvellesVariables);
 	}
 	
-	protected void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables, int pCoups) {
+	protected void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], IndicesMastermind pMesNouvellesVariables, IndicesMastermind pMesAnciennesVariables, int pCoups) {
 		// Déclaration de variable
 		if(pCoups != 1)
 		{

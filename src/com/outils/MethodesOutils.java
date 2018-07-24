@@ -1,4 +1,4 @@
-package com.abc;
+package com.outils;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import com.logoutil.LogOutil;
 
-public class Abc {
+public class MethodesOutils {
 	// Affiche la combinaison
 	public void afficheCombinaison(byte pCombi[]) {
 		for(int i = 0; i < pCombi.length; i++)
@@ -14,7 +14,7 @@ public class Abc {
 			System.out.print(pCombi[i]);
 		}
 	}
-	
+
 	// Affiche la réponse du recherche + ou - et renvoie le nombre de chiffre de la combinaison qui sont bon
 	public byte afficheReponseR(byte pCombinaison[], byte pProposition[]) {
 		// Déclaration de variable
@@ -44,7 +44,7 @@ public class Abc {
 	// Affiche la réponse du Mastemind et renvoie le nombre de chiffre de la combinaison qui sont bon
 	public byte afficheReponseM(byte pCombinaison[], byte pProposition[]) {
 		// Déclaration de variable
-		MastermindVariable indice = new MastermindVariable();
+		IndicesMastermind indice = new IndicesMastermind();
 		boolean tabIndice[] = new boolean[pCombinaison.length];
 
 		// On initialise les valeur à faux
@@ -81,7 +81,7 @@ public class Abc {
 	}
 	
 	// Affiche la réponse du Mastemind et renvoie le nombre de chiffre de la combinaison qui sont bon
-	public void afficheReponseM(byte pCombinaison[], byte pProposition[], MastermindVariable pMesNouvellesVariables) {
+	public void afficheReponseM(byte pCombinaison[], byte pProposition[], IndicesMastermind pMesNouvellesVariables) {
 		// Déclaration de variable
 		boolean tabIndice[] = new boolean[pCombinaison.length];
 		
@@ -131,43 +131,77 @@ public class Abc {
 	}
 		
 	// Récupère une entrée de l'utilisateur est la converti en un tableaux de byte
-	/*
-	 * Proposition
-	 * pas inférieur à 0
-	 * pas supérieur à max * 1_111
-	 */
-	public void lisCombinaison(byte pNombre[]) {
-		// Déclaration de variable
-		int entreeUtilisateur = 0;
-		entreeUtilisateur = entree();
+	public void lisCombinaison(byte pNombre[], int pNbValeur) {
+		// déclaration de variable
+		int entreeInt = 0;
+		
+		// On appelle lisEntree
+		entreeInt = lisEntree(pNombre.length, pNbValeur);
 		
 		// Convertion en un tableaux de byte de l'entrée
 		for(int i = 0; i < pNombre.length; i++)
 		{				
-			pNombre[i] = (byte) (entreeUtilisateur / Math.pow(10, (pNombre.length - (i + 1))));
-			entreeUtilisateur -= pNombre[i] * Math.pow(10, (pNombre.length - (i + 1)));
+			pNombre[i] = (byte) (entreeInt / Math.pow(10, (pNombre.length - (i + 1))));
+			entreeInt -= pNombre[i] * Math.pow(10, (pNombre.length - (i + 1)));
 		}
 	}
 	
+	public int lisEntree(int pLongueurEntree, int pNbValeur) {
+		// Déclaration de variable
+		String entreeString = "";
+		int entreeInt = 0;
+		int maxInt = 0;
+
+		boolean entreBonne = false;
+
+		for(int i = 0; i < pLongueurEntree; i++)
+		{				
+			maxInt += pNbValeur * Math.pow(10, (pLongueurEntree - (i + 1)));
+		}
+
+		while(entreBonne == false)
+		{
+			entreeString = entree();
+			entreeInt = 0;
+			if(entreeString.length() == pLongueurEntree)
+			{				
+				// Convertion en un tableaux de byte de l'entrée
+				for(int i = 0; i < pLongueurEntree; i++)
+				{				
+				entreeInt += (int) (entreeString.charAt(i) - 48) * Math.pow(10, (pLongueurEntree - (i + 1)));
+				}
+				if(entreeInt >= 0 && entreeInt <= maxInt)
+				{
+					entreBonne = true;
+				}	
+			}
+			if(entreBonne == false)
+			{
+				System.out.println("Veuillez entrer une valeur valide");
+			}
+		}
+				
+		return entreeInt;
+	}
+	
 	// Récupère un entrée de l'utilisateur
-	public int entree() {
+	public String entree() {
 		// Déclaration de variable
 		Scanner clavier = new Scanner(System.in);
-		int entreeUtilisateur = 0;
+		String entreeUtilisateur = "";
 		
-		Boolean estShort = false;
+		Boolean estString = false;
 		
-		while(estShort != true)
+		while(estString != true)
 		{
 			try
 			{
 				// Récupération d'une entrée utilisateur
-				entreeUtilisateur = clavier.nextInt();
-				estShort = true;
+				entreeUtilisateur = clavier.next();
+				estString = true;
 			}
 			catch(InputMismatchException e)
 			{
-				LogOutil.LOGGER.trace("InputMismatchException -> " + e.getMessage());
 				clavier.next();
 				System.out.println("Veuillez entrer une valeur valide");
 			}
@@ -260,7 +294,7 @@ public class Abc {
 		}
 	}
 	
-	public void guereMastermindVariable(MastermindVariable pMesNouvellesVariables, MastermindVariable pMesAnciennesVariables) {
+	public void guereMastermindVariable(IndicesMastermind pMesNouvellesVariables, IndicesMastermind pMesAnciennesVariables) {
 		pMesAnciennesVariables.valide = pMesNouvellesVariables.valide;
 		pMesAnciennesVariables.malPlace = pMesNouvellesVariables.malPlace;
 		pMesNouvellesVariables.valide = 0;
@@ -270,7 +304,7 @@ public class Abc {
 	public Boolean demande() {
 		System.out.println("\t0 - Non");
 		System.out.println("\t1 - Oui");
-		if(entree() == 1)
+		if(lisEntree(1, 1) == 1)
 		{
 			return true;
 		}
@@ -289,5 +323,4 @@ public class Abc {
 		System.out.println("Veux-tu changer de jeux ?");
 		return demande();
 	}
-
 }

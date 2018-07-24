@@ -1,14 +1,14 @@
 package com.main;
 
-import com.abc.Abc;
 import com.jeux.Jeux;
+import com.outils.MethodesOutils;
 
 public class SelectionModes {
 	/*
 	 * Variable de classe
 	 */
 	//
-	static Abc monAbc = new Abc();
+	static MethodesOutils monAbc = new MethodesOutils();
 
 	
 	/*
@@ -28,16 +28,16 @@ public class SelectionModes {
 		//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
 		// Switch pour le choix du jeux
 		
+		//Affichage du choix
+		System.out.println("Choisis le mode");
+		System.out.println("\t1 - Challenger");
+		System.out.println("\t2 - Défenseur");
+		System.out.println("\t3 - Duel");
+		
 		do
 		{
-			//Affichage du choix à chaque boucle
-			System.out.println("Choisis le mode");
-			System.out.println("\t1 - Challenger");
-			System.out.println("\t2 - Défenseur");
-			System.out.println("\t3 - Duel");
-
 			// Récupération du choix
-			choix = monAbc.entree();
+			choix = monAbc.lisEntree(1, 3);
 
 			switch(choix)
 			{
@@ -63,7 +63,7 @@ public class SelectionModes {
 				}while(rejouer != false);
 				break;
 			default :
-				System.out.println("Choisis une nombre valide, y a pas de mode de jeux caché");
+				System.out.println("Veuillez entrer une valeur valide");
 				break;
 			}
 		}while(choix != 1 && choix != 2 && choix != 3);

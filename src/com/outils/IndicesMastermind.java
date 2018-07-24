@@ -1,6 +1,6 @@
-package com.abc;
+package com.outils;
 
-public class MastermindVariable {
+public class IndicesMastermind {
 	/*
 	 * Variable de classe
 	 */
@@ -14,7 +14,7 @@ public class MastermindVariable {
 	 */
 	
 	// Constructeur sans paramètres
-	public MastermindVariable() {
+	public IndicesMastermind() {
 		valide = 0;
 		malPlace = 0;
 	}

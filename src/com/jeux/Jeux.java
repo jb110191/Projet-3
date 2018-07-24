@@ -1,12 +1,13 @@
 package com.jeux;
 
-import com.abc.Abc;
+import com.outils.MethodesOutils;
 
 public interface Jeux {
 	/*
 	 * Variable de classe
 	 */
-	static Abc monAbc = new Abc();
+	
+	static MethodesOutils mesMethodesOutils = new MethodesOutils();
 	
 	/*
 	 * Constructeur
