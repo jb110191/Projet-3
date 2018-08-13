@@ -91,8 +91,8 @@ public class Mastermind implements Jeux {
 		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe Mastermind.");
 		
 		// Déclaration de variable
-		byte combinaisonJoueur[] = new byte[4];
-		byte proposition[] = new byte[4];	
+		byte combinaisonJoueur[] = new byte[6];
+		byte proposition[] = new byte[6];	
 		
 		IndicesMastermind mesNouvellesVariables = new IndicesMastermind();
 		IndicesMastermind mesAnciennesVariables = new IndicesMastermind();
