@@ -48,15 +48,11 @@ public class RecherchePlusMoins implements Jeux {
 		// Génération d'une combinaison
 		instanceMethodesOutils.genereCombinaison(combinaisonIA);
 
+		// Affichage de la combinaison en mode Debug
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
 			System.out.println("Mode debug");
-			System.out.print("La combinaison est ");
-			for(int i = 0; i < combinaisonIA.length; i++)
-			{
-				System.out.print(combinaisonIA[i]);
-			}
-			System.out.println();
+			System.out.println("La combinaison est " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
 		}
 
 		// Le joueur cherche la combinaison de l'IA
@@ -162,15 +158,11 @@ public class RecherchePlusMoins implements Jeux {
 		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, 9);
 		System.out.println();
 
+		// Affichage de la combinaison en mode Debug
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
 			System.out.println("Mode debug");
-			System.out.print("La combinaison est ");
-			for(int i = 0; i < combinaisonIA.length; i++)
-			{
-				System.out.print(combinaisonIA[i]);
-			}
-			System.out.println();
+			System.out.println("La combinaison est " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
 		}
 
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
@@ -222,8 +214,9 @@ public class RecherchePlusMoins implements Jeux {
 		}
 		else if(valideIA == combinaisonJoueur.length)
 		{
-			System.out.println("L'IA a gagné en " + coups + " coups.");
+			System.out.println("L'IA a gagné en " + coups + " coups, sa combinaison était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
 		}
+		System.out.println();
 
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Fin de la méthode Duel de la classe RecherchePlusMoins.");
