@@ -20,7 +20,6 @@ public class SelectionJeux {
 	static EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur();
 	static Rejouer instanceRejouer = new Rejouer();
 
-
 	/*
 	 * Constructeur
 	 */

@@ -9,7 +9,7 @@ public class Main {
 		LogOutil.LOGGER.trace("Début du programme");
 
 		// Affichage de l'entrée du programme
-		System.out.println("Bienvenue l'application Recherche + ou - / Mastermind");
+		System.out.println("Bienvenue l'application Recherche +/- ou Mastermind");
 		System.out.println();
 
 		//On récupère les propriétés

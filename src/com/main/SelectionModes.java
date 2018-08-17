@@ -1,6 +1,7 @@
 package com.main;
 
 import com.jeux.Jeux;
+import com.jeux.RecherchePlusMoins;
 import com.outils.EntreeUtilisateur;
 import com.outils.Rejouer;
 
@@ -30,7 +31,16 @@ public class SelectionModes {
 			// Switch pour le choix du jeux
 
 			//Affichage du choix
-			System.out.println("Choisis le mode");
+			System.out.print("Choisis le mode du ");
+			if(pMonJeux.getClass() == RecherchePlusMoins.class)
+			{
+				System.out.print("Recherche +/-");
+					}
+			else
+			{
+				System.out.print("Mastermind");	
+			}
+			System.out.println();
 			System.out.println("\t1 - Challenger");
 			System.out.println("\t2 - Défenseur");
 			System.out.println("\t3 - Duel");
