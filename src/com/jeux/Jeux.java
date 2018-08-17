@@ -1,19 +1,21 @@
 package com.jeux;
 
+import com.outils.EntreeUtilisateur;
 import com.outils.MethodesOutils;
 
 public interface Jeux {
 	/*
 	 * Variable de classe
 	 */
-	
-	static MethodesOutils mesMethodesOutils = new MethodesOutils();
-	
+
+	static MethodesOutils instanceMethodesOutils = new MethodesOutils();
+	static EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur ();
+
 	/*
 	 * Constructeur
 	 */
 	//
-	
+
 	/*
 	 * Méthode
 	 */

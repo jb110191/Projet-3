@@ -1,21 +1,19 @@
 package com.main;
 
 import com.jeux.Jeux;
-import com.outils.MethodesOutils;
+import com.outils.EntreeUtilisateur;
 
 public class SelectionModes {
 	/*
 	 * Variable de classe
 	 */
 	//
-	static MethodesOutils monAbc = new MethodesOutils();
+	static EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur ();
 
-	
 	/*
 	 * Constructeur
 	 */
-	//
-	
+
 	/*
 	 * Méthode
 	 */
@@ -24,20 +22,20 @@ public class SelectionModes {
 		// Déclaration des variables
 		int choix = 0;
 		Boolean rejouer = false;
-		
+
 		//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
 		// Switch pour le choix du jeux
-		
+
 		//Affichage du choix
 		System.out.println("Choisis le mode");
 		System.out.println("\t1 - Challenger");
 		System.out.println("\t2 - Défenseur");
 		System.out.println("\t3 - Duel");
-		
+
 		do
 		{
 			// Récupération du choix
-			choix = monAbc.lisEntree(1, 3);
+			choix = instanceEntreeUtilisateur.lisEntree(1, 3);
 
 			switch(choix)
 			{
@@ -45,21 +43,21 @@ public class SelectionModes {
 				do
 				{
 					pMonJeux.Challenger();
-					rejouer = monAbc.demandeRejouer();
+					rejouer = instanceEntreeUtilisateur.demandeRejouer();
 				}while(rejouer != false);
 				break;
 			case 2 :
 				do
 				{
 					pMonJeux.Defenseur();
-					rejouer = monAbc.demandeRejouer();
+					rejouer = instanceEntreeUtilisateur.demandeRejouer();
 				}while(rejouer != false);
 				break;
 			case 3 :
 				do
 				{
 					pMonJeux.Duel();
-					rejouer = monAbc.demandeRejouer();
+					rejouer = instanceEntreeUtilisateur.demandeRejouer();
 				}while(rejouer != false);
 				break;
 			default :

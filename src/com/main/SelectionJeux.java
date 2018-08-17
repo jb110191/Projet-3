@@ -3,7 +3,7 @@ package com.main;
 import com.jeux.Jeux;
 import com.jeux.Mastermind;
 import com.jeux.RecherchePlusMoins;
-import com.outils.MethodesOutils;
+import com.outils.EntreeUtilisateur;
 
 /**
  * 
@@ -16,13 +16,12 @@ public class SelectionJeux {
 	 * Variable de classe
 	 */
 	//
-	static MethodesOutils monAbc = new MethodesOutils();
-	
+	static EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur ();
+
 	/*
 	 * Constructeur
 	 */
-	//
-	
+
 	/*
 	 * Méthode
 	 */
@@ -31,26 +30,26 @@ public class SelectionJeux {
 		// Déclaration des variables
 		int choix = 0;
 		Boolean rejouer = false;
-		
+
 		Jeux monJeux;
-		
+
 		//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
 		// Switch pour le choix du jeux
-		
+
 		// On crée une instance de SelectionModes
 		SelectionModes slctMd = new SelectionModes();
-		
+
 		do
 		{
 			//Affichage du choix à chaque boucle
 			System.out.println("Choisis le jeux");
 			System.out.println("\t1 - Recherche +/-");
 			System.out.println("\t2 - Mastermind");
-			
+
 			do
 			{
 				// Récupération du choix
-				choix = monAbc.lisEntree(1, 2);
+				choix = instanceEntreeUtilisateur.lisEntree(1, 2);
 
 				if(choix != 1 && choix != 2)
 				{
@@ -70,7 +69,7 @@ public class SelectionJeux {
 
 			// On appelle la méthode choixJeux
 			slctMd.choixModes(monJeux);
-			rejouer = monAbc.demandeAutreJeux();
+			rejouer = instanceEntreeUtilisateur.demandeAutreJeux();
 		}while(rejouer != false);
 
 		// Affichage de la sortie du programme
