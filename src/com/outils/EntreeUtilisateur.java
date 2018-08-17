@@ -98,26 +98,13 @@ public class EntreeUtilisateur {
 	}
 
 	//
-	public Boolean demande() {
-		System.out.println("\t0 - Non");
-		System.out.println("\t1 - Oui");
-		if(lisEntree(1, 1) == 1)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	public Boolean demandeRejouer() {
+	public int demandeRejouer() {
 		System.out.println("Veux-tu rejouer ?");
-		return demande();
-	}
+		System.out.println("\t0 - Rejouer le même jeu dans le même mode");
+		System.out.println("\t1 - Retour séléction du choix du mode");
+		System.out.println("\t2 - Retour séléction du choix du jeu");
+		System.out.println("\t3 - Quitter l'application");
 
-	public Boolean demandeAutreJeux() {
-		System.out.println("Veux-tu changer de jeux ?");
-		return demande();
+		return lisEntree(1, 3);
 	}
 }

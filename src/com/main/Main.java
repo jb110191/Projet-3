@@ -8,8 +8,11 @@ public class Main {
 		// Log pour afficher le début du programme
 		LogOutil.LOGGER.trace("Début du programme");
 
-		//On récupère les propriétés
+		// Affichage de l'entrée du programme
+		System.out.println("Bienvenue l'application Recherche + ou - / Mastermind");
+		System.out.println();
 
+		//On récupère les propriétés
 		ProprieteApplication mesPropriete = new ProprieteApplication();
 		/*
 		System.out.println(mesPropriete.tailleCombinaison);
@@ -20,6 +23,10 @@ public class Main {
 
 		// On appelle la méthode ChoixJeux de la classe SelectionJeux pour faire le choix du jeux 
 		slctJx.choixJeux();
+
+		// Affichage de la sortie du programme
+		System.out.println();
+		System.out.println("J'espère que le jeux t'as amusé.");
 
 		// Log pour afficher la fin du programme
 		LogOutil.LOGGER.trace("Fin du programme");

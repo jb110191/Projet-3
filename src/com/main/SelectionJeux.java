@@ -4,6 +4,7 @@ import com.jeux.Jeux;
 import com.jeux.Mastermind;
 import com.jeux.RecherchePlusMoins;
 import com.outils.EntreeUtilisateur;
+import com.outils.Rejouer;
 
 /**
  * 
@@ -16,7 +17,9 @@ public class SelectionJeux {
 	 * Variable de classe
 	 */
 	//
-	static EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur ();
+	static EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur();
+	static Rejouer instanceRejouer = new Rejouer();
+
 
 	/*
 	 * Constructeur
@@ -69,12 +72,7 @@ public class SelectionJeux {
 
 			// On appelle la méthode choixJeux
 			slctMd.choixModes(monJeux);
-			rejouer = instanceEntreeUtilisateur.demandeAutreJeux();
-		}while(rejouer != false);
-
-		// Affichage de la sortie du programme
-		System.out.println();
-		System.out.println("J'espère que le jeux t'as amusé.");
+		}while(instanceRejouer.getChoix() == 2);
 	}
 }
 
