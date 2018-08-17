@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import com.logoutil.LogOutil;
 
 public class MethodesOutils {
-	// Affiche la combinaison
-	public void afficheCombinaison(byte pCombi[]) {
+	// Renvoi la combinaison sous forme de texte
+	public String combinaisonTexte(byte pCombi[]) {
+		String combinaison = "";
 		for(int i = 0; i < pCombi.length; i++)
 		{
-			System.out.print(pCombi[i]);
+			combinaison += pCombi[i];
 		}
+		return combinaison;
 	}
 
 	// Affiche la réponse du recherche + ou - et renvoie le nombre de chiffre de la combinaison qui sont bon

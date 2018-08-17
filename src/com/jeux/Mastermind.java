@@ -353,9 +353,7 @@ public class Mastermind implements Jeux {
 		joueIA(pListesPossibles, pChiffrePossible, pChiffreTrouve, pCombinaisonJoueur, pProposition, pMesNouvellesVariables, pMesAnciennesVariables, pCoups);
 
 		// On affiche la proposition de l'IA
-		System.out.print("\t\tL'IA propose ");
-		instanceMethodesOutils.afficheCombinaison(pProposition);
-		System.out.println("");
+		System.out.println("\t\tL'IA propose " + instanceMethodesOutils.combinaisonTexte(pProposition));
 
 		/*
 		 * Log

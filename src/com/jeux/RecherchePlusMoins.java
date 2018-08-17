@@ -251,9 +251,7 @@ public class RecherchePlusMoins implements Jeux {
 		joueIA(pCombinaisonJoueur, pProposition, pMin, pMax);
 
 		// On affiche la proposition de l'IA
-		System.out.print("\t\tL'IA propose ");
-		instanceMethodesOutils.afficheCombinaison(pProposition);
-		System.out.println("");
+		System.out.println("\t\tL'IA propose " + instanceMethodesOutils.combinaisonTexte(pProposition));
 
 		// On affiche la réponse à la proposition de l'IA
 		System.out.print("\t\tRéponse ");
