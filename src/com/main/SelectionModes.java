@@ -23,38 +23,42 @@ public class SelectionModes {
 	// Méthode pour choissir le mode de jeux grace à un switch qui appelle la méthode mode de jeu pour séléctionner le mode qui appellera le jeux en lui même
 	void choixModes(Jeux pMonJeux) {
 		// Déclaration des variables
+		String texteChoix = "";
 		int choix = 0;
+
+		//Écriture du choix
+		texteChoix += "Choisis le mode du ";
+		if(pMonJeux.getClass() == RecherchePlusMoins.class)
+		{
+			texteChoix += "Recherche +/-";
+		}
+		else
+		{
+			texteChoix += "Mastermind";	
+		}
+		texteChoix += "\n";
+		texteChoix += "\t1 - Challenger\n";
+		texteChoix += "\t2 - Défenseur\n";
+		texteChoix += "\t3 - Duel\n";
+		texteChoix += "\t";
 
 		do
 		{
 			//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
 			// Switch pour le choix du jeux
-
 			//Affichage du choix
-			System.out.print("Choisis le mode du ");
-			if(pMonJeux.getClass() == RecherchePlusMoins.class)
-			{
-				System.out.print("Recherche +/-");
-					}
-			else
-			{
-				System.out.print("Mastermind");	
-			}
-			System.out.println();
-			System.out.println("\t1 - Challenger");
-			System.out.println("\t2 - Défenseur");
-			System.out.println("\t3 - Duel");
-
+			System.out.print(texteChoix);
 			do
 			{
 				// Récupération du choix
-				choix = instanceEntreeUtilisateur.lisEntree(1, 3);
+				choix = instanceEntreeUtilisateur.lisEntree(1, 3, texteChoix);
 
 				switch(choix)
 				{
 				case 1 :
 					do
 					{
+						System.out.println();
 						pMonJeux.Challenger();
 						instanceRejouer.setChoix(instanceEntreeUtilisateur.demandeRejouer());
 					}while(instanceRejouer.getChoix() == 0);
@@ -62,6 +66,7 @@ public class SelectionModes {
 				case 2 :
 					do
 					{
+						System.out.println();
 						pMonJeux.Defenseur();
 						instanceRejouer.setChoix(instanceEntreeUtilisateur.demandeRejouer());
 					}while(instanceRejouer.getChoix() == 0);
@@ -69,6 +74,7 @@ public class SelectionModes {
 				case 3 :
 					do
 					{
+						System.out.println();
 						pMonJeux.Duel();
 						instanceRejouer.setChoix(instanceEntreeUtilisateur.demandeRejouer());
 					}while(instanceRejouer.getChoix() == 0);
@@ -77,6 +83,7 @@ public class SelectionModes {
 					System.out.println("Veuillez entrer une valeur valide");
 					break;
 				}
+				System.out.println();
 			}while(choix != 1 && choix != 2 && choix != 3);
 		}while(instanceRejouer.getChoix() == 1);
 	}

@@ -9,7 +9,7 @@ public class Main {
 		LogOutil.LOGGER.trace("Début du programme");
 
 		// Affichage de l'entrée du programme
-		System.out.println("Bienvenue l'application Recherche +/- ou Mastermind");
+		System.out.println("Bienvenue dans l'application Recherche +/- ou Mastermind");
 		System.out.println();
 
 		//On récupère les propriétés
@@ -25,7 +25,6 @@ public class Main {
 		slctJx.choixJeux();
 
 		// Affichage de la sortie du programme
-		System.out.println();
 		System.out.println("J'espère que le jeux t'as amusé.");
 
 		// Log pour afficher la fin du programme

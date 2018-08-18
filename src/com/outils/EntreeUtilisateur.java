@@ -17,12 +17,12 @@ public class EntreeUtilisateur {
 	 */
 
 	// Récupère une entrée de l'utilisateur est la converti en un tableaux de byte
-	public void lisCombinaison(byte pNombre[], int pNbValeur) {
+	public void lisCombinaison(byte pNombre[], int pNbValeur, String pTexteChoix) {
 		// déclaration de variable
 		int entreeInt = 0;
 
 		// On appelle lisEntree
-		entreeInt = lisEntree(pNombre.length, pNbValeur);
+		entreeInt = lisEntree(pNombre.length, pNbValeur, pTexteChoix);
 
 		// Convertion en un tableaux de byte de l'entrée
 		for(int i = 0; i < pNombre.length; i++)
@@ -32,7 +32,7 @@ public class EntreeUtilisateur {
 		}
 	}
 
-	public int lisEntree(int pLongueurEntree, int pNbValeur) {
+	public int lisEntree(int pLongueurEntree, int pNbValeur, String pTexteChoix) {
 		// Déclaration de variable
 		String entreeString = "";
 		int entreeInt = 0;
@@ -64,9 +64,10 @@ public class EntreeUtilisateur {
 			if(entreBonne == false)
 			{
 				System.out.println("Veuillez entrer une valeur valide");
+				System.out.println();
+				System.out.print(pTexteChoix);
 			}
 		}
-
 		return entreeInt;
 	}
 
@@ -99,12 +100,19 @@ public class EntreeUtilisateur {
 
 	//
 	public int demandeRejouer() {
-		System.out.println("Veux-tu rejouer ?");
-		System.out.println("\t0 - Rejouer le même jeu dans le même mode");
-		System.out.println("\t1 - Retour séléction du choix du mode");
-		System.out.println("\t2 - Retour séléction du choix du jeu");
-		System.out.println("\t3 - Quitter l'application");
+		// Variable
+		String texteChoix = "";
 
-		return lisEntree(1, 3);
+		texteChoix += "Veux-tu rejouer ?\n";
+		texteChoix += "\t0 - Rejouer le même jeu dans le même mode\n";
+		texteChoix += "\t1 - Retour séléction du choix du mode\n";
+		texteChoix += "\t2 - Retour séléction du choix du jeu\n";
+		texteChoix += "\t3 - Quitter l'application\n";
+		texteChoix += "\t";
+
+		// Affichage de la demande
+		System.out.print(texteChoix);
+
+		return lisEntree(1, 3, texteChoix);
 	}
 }

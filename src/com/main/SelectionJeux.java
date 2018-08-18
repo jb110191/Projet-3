@@ -30,8 +30,8 @@ public class SelectionJeux {
 	// Méthode pour choissir le jeux grace à un switch qui appelle la méthode mode de jeu pour séléctionner le mode qui appellera le jeux en lui même
 	void choixJeux() {
 		// Déclaration des variables
+		String texteChoix = "";
 		int choix = 0;
-		Boolean rejouer = false;
 
 		Jeux monJeux;
 
@@ -41,23 +41,27 @@ public class SelectionJeux {
 		// On crée une instance de SelectionModes
 		SelectionModes slctMd = new SelectionModes();
 
+		//Écriture du choix
+		texteChoix += "Choisis le jeux\n";
+		texteChoix += "\t1 - Recherche +/-\n";
+		texteChoix += "\t2 - Mastermind\n";
+		texteChoix += "\t";
+
 		do
 		{
-			//Affichage du choix à chaque boucle
-			System.out.println("Choisis le jeux");
-			System.out.println("\t1 - Recherche +/-");
-			System.out.println("\t2 - Mastermind");
-
+			// Affichage du choix à chaque boucle
+			System.out.print(texteChoix);
 			do
-			{
+			{	
 				// Récupération du choix
-				choix = instanceEntreeUtilisateur.lisEntree(1, 2);
+				choix = instanceEntreeUtilisateur.lisEntree(1, 2, texteChoix);
 
 				if(choix != 1 && choix != 2)
 				{
 					System.out.println("Veuillez entrer une valeur valide");
 				}
 			}while(choix != 1 && choix != 2);
+			System.out.println();
 
 			// On créer un instance de RecherchePlusMoins ou de Mastermind
 			if(choix == 1)

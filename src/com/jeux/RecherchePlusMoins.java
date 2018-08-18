@@ -51,8 +51,7 @@ public class RecherchePlusMoins implements Jeux {
 		// Affichage de la combinaison en mode Debug
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
-			System.out.println("Mode debug");
-			System.out.println("La combinaison est " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+			instanceMethodesOutils.affichageDebug(combinaisonIA);
 		}
 
 		// Le joueur cherche la combinaison de l'IA
@@ -70,6 +69,7 @@ public class RecherchePlusMoins implements Jeux {
 		}while(valideJoueur != combinaisonIA.length); // Il faut un nombre de coups maximal
 
 		System.out.println("Tu as gagné en " + coups + " coups.");
+		System.out.println();
 
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Fin de la méthode Challenger de la classe RecherchePlusMoins.");
@@ -80,12 +80,16 @@ public class RecherchePlusMoins implements Jeux {
 		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe RecherchePlusMoins.");
 
 		// Déclaration de variable
+		String texteChoix = "";
 		byte combinaisonJoueur[] = new byte[4];
 		byte proposition[] = new byte[4];
 		byte min[] = new byte[4];
 		byte max[] = new byte[4];
 		byte valideIA = 0;
 		int coups = 0;
+
+		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9, ce sera ta combinaison.";
+		texteChoix += "\t\t";
 
 		// On règle les valeurs minimals et maximals de la combinaison
 		instanceMethodesOutils.reglageMinMax(min, max);
@@ -99,9 +103,8 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 
 		// On demande au joueur de rentrer un combinaison
-		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9." );
-		System.out.print("\t\t");
-		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, 9);
+		System.out.print(texteChoix);
+		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, 9, texteChoix);
 		System.out.println();
 
 		// L'IA cherche la combinaison du joueur
@@ -119,6 +122,7 @@ public class RecherchePlusMoins implements Jeux {
 		}while(valideIA != combinaisonJoueur.length);
 
 		System.out.println("Tu as gagné en " + coups + " coups.");
+		System.out.println();
 
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe RecherchePlusMoins.");
@@ -129,6 +133,7 @@ public class RecherchePlusMoins implements Jeux {
 		LogOutil.LOGGER.trace("Début de la méthode Duel de la classe RecherchePlusMoins.");
 
 		// Déclaration de variable
+		String texteChoix = "";
 		byte combinaisonJoueur[] = new byte[4];
 		byte combinaisonIA[] = new byte[4];
 		byte proposition[] = new byte[4];
@@ -137,6 +142,9 @@ public class RecherchePlusMoins implements Jeux {
 		byte valideJoueur = 0;
 		byte valideIA = 0;
 		int coups = 0;
+
+		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9, ce sera ta combinaison.";
+		texteChoix += "\t\t";
 
 		// On règle les valeurs minimals et maximals de la combinaison
 		instanceMethodesOutils.reglageMinMax(min, max);
@@ -153,16 +161,14 @@ public class RecherchePlusMoins implements Jeux {
 		instanceMethodesOutils.genereCombinaison(combinaisonIA);
 
 		// On demande au joueur de rentrer un combinaison
-		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9." );
-		System.out.print("\t\t");
-		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, 9);
+		System.out.print(texteChoix);
+		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, 9, texteChoix);
 		System.out.println();
 
 		// Affichage de la combinaison en mode Debug
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
-			System.out.println("Mode debug");
-			System.out.println("La combinaison est " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+			instanceMethodesOutils.affichageDebug(combinaisonIA);
 		}
 
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
@@ -224,12 +230,17 @@ public class RecherchePlusMoins implements Jeux {
 
 	// Méthode de tour
 	protected byte tourJoueur(byte pCombinaisonIA[], byte pProposition[]) {
+		// Variable
+		String texteChoix = "";
+
+		texteChoix +="\tJoueur\n";
+		texteChoix += "\t\tLe joueur propose ";
+
 		// Affichage du jeu
-		System.out.println("\tJoueur");
+		System.out.print(texteChoix);
 
 		// Lis l'entrée de l'utilisateur
-		System.out.print("\t\tLe joueur propose ");
-		instanceEntreeUtilisateur.lisCombinaison(pProposition, 9);	
+		instanceEntreeUtilisateur.lisCombinaison(pProposition, 9, texteChoix);	
 
 		// On affiche la réponse à la proposition du joueur
 		System.out.print("\t\tRéponse ");

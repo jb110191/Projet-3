@@ -52,8 +52,7 @@ public class Mastermind implements Jeux {
 		// Affichage de la combinaison en mode Debug
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
-			System.out.println("Mode debug");
-			System.out.println("La combinaison est " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+			instanceMethodesOutils.affichageDebug(combinaisonIA);
 		}
 
 		// Le joueur cherche la combinaison de l'IA
@@ -77,6 +76,7 @@ public class Mastermind implements Jeux {
 		}while(valideJoueur != combinaisonIA.length); // Il faut un nombre de coups maximal
 
 		System.out.println("Tu as gagné en " + coups + " coups.");
+		System.out.println();
 
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Fin de la méthode Challenger de la classe Mastermind.");
@@ -87,14 +87,17 @@ public class Mastermind implements Jeux {
 		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe Mastermind.");
 
 		// Déclaration de variable
+		String texteChoix = "";
 		byte combinaisonJoueur[] = new byte[6];
-		byte proposition[] = new byte[6];	
+		byte proposition[] = new byte[6];
+		byte nombreValeur = 4;
+		int coups = 0;
+
+		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + ", ce sera ta combinaison.";
+		texteChoix += "\t\t";
 
 		IndicesMastermind mesNouvellesVariables = new IndicesMastermind();
 		IndicesMastermind mesAnciennesVariables = new IndicesMastermind();
-
-		byte nombreValeur = 4;
-		int coups = 0;
 
 		ArrayList <ArrayList <Integer>> listesPossibles = new ArrayList <ArrayList <Integer>>();
 		ArrayList <Integer> chiffrePossible = new ArrayList <Integer>();
@@ -139,10 +142,9 @@ public class Mastermind implements Jeux {
 		System.out.println("Trouver la combinaison du joueur");
 		System.out.println();
 
-		// On demande au joueur de rentrer un combinaison
-		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + "." );
-		System.out.print("\t\t");
-		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, nombreValeur - 1);
+		// On demande au joueur de rentrer une combinaison
+		System.out.print(texteChoix);
+		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, nombreValeur - 1, texteChoix);
 		System.out.println();
 
 		// L'IA cherche la combinaison du joueur
@@ -174,6 +176,7 @@ public class Mastermind implements Jeux {
 		{
 			System.out.println("L'IA a perdu.");
 		}
+		System.out.println();
 
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe Mastermind.");
@@ -184,12 +187,16 @@ public class Mastermind implements Jeux {
 		LogOutil.LOGGER.trace("Début de la méthode Duel de la classe Mastermind.");
 
 		// Déclaration de variable
+		String texteChoix = "";
 		byte combinaisonJoueur[] = new byte[4];
 		byte combinaisonIA[] = new byte[4];
 		byte proposition[] = new byte[4];
 		byte valideJoueur = 0;
 		byte nombreValeur = 4;
 		int coups = 0;
+
+		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + ", ce sera ta combinaison.";
+		texteChoix += "\t\t";
 
 		IndicesMastermind mesNouvellesVariables = new IndicesMastermind();
 		IndicesMastermind mesAnciennesVariables = new IndicesMastermind();
@@ -238,9 +245,8 @@ public class Mastermind implements Jeux {
 		System.out.println();
 
 		// On demande au joueur de rentrer un combinaison
-		System.out.println("\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + "." );
-		System.out.print("\t\t");
-		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, nombreValeur - 1);
+		System.out.print(texteChoix);
+		instanceEntreeUtilisateur.lisCombinaison(combinaisonJoueur, nombreValeur - 1, texteChoix);
 		System.out.println();
 
 		// Génération d'une combinaison
@@ -249,8 +255,7 @@ public class Mastermind implements Jeux {
 		// Affichage de la combinaison en mode Debug
 		if(LogOutil.LOGGER.isDebugEnabled() == true)
 		{
-			System.out.println("Mode debug");
-			System.out.println("La combinaison est " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+			instanceMethodesOutils.affichageDebug(combinaisonIA);
 		}
 
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
@@ -327,12 +332,17 @@ public class Mastermind implements Jeux {
 
 	// Méthode de tour
 	protected byte tourJoueur(byte pCombinaisonIA[], byte pProposition[], byte pNombreValeur) {
+		// Variable
+		String texteChoix = "";
+
+		texteChoix += "\tJoueur\n";
+		texteChoix += "\t\tLe joueur propose ";
+
 		// Affichage du jeu
-		System.out.println("\tJoueur");
+		System.out.print(texteChoix);
 
 		// Lis l'entrée de l'utilisateur
-		System.out.print("\t\tLe joueur propose ");
-		instanceEntreeUtilisateur.lisCombinaison(pProposition, pNombreValeur - 1);
+		instanceEntreeUtilisateur.lisCombinaison(pProposition, pNombreValeur - 1, texteChoix);
 
 		// On affiche la réponse à la proposition du joueur
 		System.out.print("\t\tRéponse ");

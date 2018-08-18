@@ -219,4 +219,10 @@ public class MethodesOutils {
 		pMesNouvellesVariables.valide = 0;
 		pMesNouvellesVariables.malPlace = 0;
 	}
+
+	public void affichageDebug(byte pCombinaisonIA[]) {
+		System.out.println("Mode debug");
+		System.out.println("La combinaison est " + this.combinaisonTexte(pCombinaisonIA) + ".");
+		System.out.println();
+	}
 }
