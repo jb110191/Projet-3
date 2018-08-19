@@ -32,10 +32,10 @@ public class Mastermind implements Jeux {
 		LogOutil.LOGGER.trace("Début de la méthode Challenger de la classe Mastermind.");
 
 		// Déclaration de variable
-		byte combinaisonIA[] = new byte[4];
-		byte proposition[] = new byte[4];
+		byte combinaisonIA[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
+		byte proposition[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
 		byte valideJoueur = 0;
-		byte nombreValeur = 4;
+		byte nombreValeur = instanceProprieteApplication.getNombreValeur();
 		int coups = 0;
 
 		/*
@@ -73,7 +73,7 @@ public class Mastermind implements Jeux {
 
 			// On saute une ligne pour l'affichage
 			System.out.println();
-		}while(valideJoueur != combinaisonIA.length); // Il faut un nombre de coups maximal
+		}while(valideJoueur != combinaisonIA.length && coups < instanceProprieteApplication.getCoupsMax());
 
 		System.out.println("Tu as gagné en " + coups + " coups.");
 		System.out.println();
@@ -88,9 +88,9 @@ public class Mastermind implements Jeux {
 
 		// Déclaration de variable
 		String texteChoix = "";
-		byte combinaisonJoueur[] = new byte[6];
-		byte proposition[] = new byte[6];
-		byte nombreValeur = 4;
+		byte combinaisonJoueur[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
+		byte proposition[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
+		byte nombreValeur = instanceProprieteApplication.getNombreValeur();
 		int coups = 0;
 
 		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + ", ce sera ta combinaison.";
@@ -166,7 +166,7 @@ public class Mastermind implements Jeux {
 
 			// On saute une ligne pour l'affichage
 			System.out.println();		
-		}while(mesNouvellesVariables.valide != combinaisonJoueur.length && coups < 10);
+		}while(mesNouvellesVariables.valide != combinaisonJoueur.length && coups < instanceProprieteApplication.getCoupsMax());
 
 		if(mesNouvellesVariables.valide == combinaisonJoueur.length)
 		{
@@ -188,11 +188,11 @@ public class Mastermind implements Jeux {
 
 		// Déclaration de variable
 		String texteChoix = "";
-		byte combinaisonJoueur[] = new byte[4];
-		byte combinaisonIA[] = new byte[4];
-		byte proposition[] = new byte[4];
+		byte combinaisonJoueur[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
+		byte combinaisonIA[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
+		byte proposition[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
 		byte valideJoueur = 0;
-		byte nombreValeur = 4;
+		byte nombreValeur = instanceProprieteApplication.getNombreValeur();
 		int coups = 0;
 
 		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + ", ce sera ta combinaison.";
@@ -283,7 +283,7 @@ public class Mastermind implements Jeux {
 
 				// On saute une ligne pour l'affichage
 				System.out.println();
-			}while(valideJoueur != combinaisonIA.length && mesNouvellesVariables.valide != combinaisonJoueur.length);
+			}while(valideJoueur != combinaisonIA.length && mesNouvellesVariables.valide != combinaisonJoueur.length && coups < instanceProprieteApplication.getCoupsMax());
 		}
 		else
 		{
@@ -309,7 +309,7 @@ public class Mastermind implements Jeux {
 
 				// On saute une ligne pour l'affichage
 				System.out.println();
-			}while(valideJoueur != combinaisonIA.length && mesNouvellesVariables.valide != combinaisonJoueur.length);
+			}while(valideJoueur != combinaisonIA.length && mesNouvellesVariables.valide != combinaisonJoueur.length && coups < instanceProprieteApplication.getCoupsMax());
 		}
 		if(valideJoueur == combinaisonIA.length && mesNouvellesVariables.valide == combinaisonJoueur.length)
 		{

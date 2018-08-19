@@ -12,10 +12,17 @@ public class Main {
 		System.out.println("Bienvenue dans l'application Recherche +/- ou Mastermind");
 		System.out.println();
 
-		//On récupère les propriétés
-		ProprieteApplication mesPropriete = new ProprieteApplication();
+		//On crée un instance ProprieteApplication puis on récupère les propriétés
+		ProprieteApplication mesProprietes = new ProprieteApplication();
+		mesProprietes.recupereProprieteApplication();
+
+		// On demande le mode debug
 		/*
-		System.out.println(mesPropriete.tailleCombinaison);
+		mesProprietes.setTailleCombinaison() = ;
+
+		mesProprietes.setCoupsMax() = ;
+
+		mesProprietes.setNombreValeur() = ;
 		 */
 
 		// On crée une instance de SelectionJeux

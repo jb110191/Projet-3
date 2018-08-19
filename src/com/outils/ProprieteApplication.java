@@ -12,9 +12,43 @@ public class ProprieteApplication {
 	 */
 
 	//Les propiétés récupéré de l'application
-	public int tailleCombinaison;
-	public int coupsMax;
-	public byte nombreValeur;
+	static int tailleCombinaison;
+	static int coupsMax;
+	static byte nombreValeur;
+
+	/*
+	 * Constructeur
+	 */	
+
+	/*
+	 * Méthode
+	 */
+
+	// Accesseur
+	public int getTailleCombinaison() {
+		return tailleCombinaison;
+	}
+
+	public int getCoupsMax() {
+		return coupsMax;
+	}
+
+	public byte getNombreValeur() {
+		return nombreValeur;
+	}
+
+	// Modificateur
+	public void setTailleCombinaison(int pTailleCombinaison) {
+		tailleCombinaison = pTailleCombinaison;
+	}
+
+	public void setCoupsMax(int pCoupsMax) {
+		coupsMax = pCoupsMax;
+	}
+
+	public void setNombreValeur(byte pNombreValeur) {
+		nombreValeur = pNombreValeur;
+	}
 
 	/*
     Pour chaque jeu :
@@ -23,31 +57,24 @@ public class ProprieteApplication {
     Pour le Mastermind :
         le nombre couleur/chiffre utilisables (de 4 à 10)
 	 */
-
-	/*
-	 * Constructeur
-	 */
-
-	// Constructeur sans paramètre
-	public ProprieteApplication ()
+	
+	// Récupération des proptiétés par un fichier .properties
+	public  void recupereProprieteApplication ()
 	{
 		Configurations configs = new Configurations();
 		Configuration maConfig;
 
 		try {
-			maConfig = configs.properties("config.txt");
+			maConfig = configs.properties("config.properties");
 
 			tailleCombinaison = maConfig.getInt("tailleCombinaison");
 			coupsMax = maConfig.getInt("coupsMax");
 			nombreValeur = maConfig.getByte("nombreValeur");
 		} catch (ConfigurationException e) {
 			LogOutil.LOGGER.trace("Problème lors de la récupération des propriétés de l'application");
+			tailleCombinaison = 4;
+			coupsMax = 10;
+			nombreValeur = 4;
 		}
 	}
-
-	/*
-	 * Méthode
-	 */
-
-	// 
 }
