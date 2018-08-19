@@ -2,9 +2,12 @@ package com.main;
 
 import com.logoutil.LogOutil;
 import com.outils.ProprieteApplication;
+import com.outils.EntreeUtilisateur;
 
 public class Main {
 	public static void main(String[] args) {
+
+
 		// Log pour afficher le début du programme
 		LogOutil.LOGGER.trace("Début du programme");
 
@@ -17,13 +20,39 @@ public class Main {
 		mesProprietes.recupereProprieteApplication();
 
 		// On demande le mode debug
-		/*
-		mesProprietes.setTailleCombinaison() = ;
+		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		{
+			String texteChoix = "";
 
-		mesProprietes.setCoupsMax() = ;
+			EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur();
 
-		mesProprietes.setNombreValeur() = ;
-		 */
+			// tailleCombinaison
+			texteChoix += "Choissisez la taille de la combinaison pour le Recherche +/- et le Mastermind\n";
+			texteChoix += "\tValeur de 1 à 8\n";
+			texteChoix += "\t\t";
+			System.out.print(texteChoix);
+			mesProprietes.setTailleCombinaison(instanceEntreeUtilisateur.lisValeur(1, 8, texteChoix));
+
+			// Remise à zéro de texteChoix
+			texteChoix = "";
+
+			// coupsMax
+			texteChoix += "Choissisez le nombre de coups maximal pour le Recherche +/- et le Mastermind\n";
+			texteChoix += "\tValeur de 1 à 30\n";
+			texteChoix += "\t\t";
+			System.out.print(texteChoix);
+			mesProprietes.setCoupsMax(instanceEntreeUtilisateur.lisValeur(1, 30, texteChoix));
+
+			// Remise à zéro de texteChoix
+			texteChoix = "";
+
+			// nombreValeur
+			texteChoix += "Choissisez le nombre de valeur pour le Mastermind\n";
+			texteChoix += "\tValeur de 4 à 10\n";
+			texteChoix += "\t\t";
+			System.out.print(texteChoix);
+			mesProprietes.setNombreValeur((byte) instanceEntreeUtilisateur.lisValeur(4, 10, texteChoix));
+		}
 
 		// On crée une instance de SelectionJeux
 		SelectionJeux slctJx = new SelectionJeux();

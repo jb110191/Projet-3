@@ -115,4 +115,35 @@ public class EntreeUtilisateur {
 
 		return lisEntree(1, 3, texteChoix);
 	}
+
+	public int lisValeur(int valeurMin, int valeurMax, String pTexteChoix) {
+		// Déclaration de variable
+		String entreeString = "";
+		int entreeInt = 0;
+
+		boolean entreBonne = false;
+
+		while(entreBonne == false)
+		{
+			entreeString = entree();
+			entreeInt = 0;
+
+			for(int i = 0; i < entreeString.length(); i++)
+			{				
+				entreeInt += (int) (entreeString.charAt(i) - 48) * Math.pow(10, (entreeString.length() - (i + 1)));
+			}
+
+			if(entreeInt >= valeurMin && entreeInt <= valeurMax)
+			{
+				entreBonne = true;
+			}
+			else
+			{
+				System.out.println("Veuillez entrer une valeur valide");
+				System.out.println();
+				System.out.print(pTexteChoix);
+			}
+		}
+		return entreeInt;
+	}
 }
