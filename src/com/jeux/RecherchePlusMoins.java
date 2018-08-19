@@ -42,7 +42,7 @@ public class RecherchePlusMoins implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Recherche Plus ou Moins : Challenger");
-		System.out.println("Trouver la combinaison de l'IA");
+		System.out.println("Trouver la combinaison de l'IA en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// Génération d'une combinaison
@@ -68,7 +68,14 @@ public class RecherchePlusMoins implements Jeux {
 			System.out.println();
 		}while(valideJoueur != combinaisonIA.length && coups < instanceProprieteApplication.getCoupsMax());
 
-		System.out.println("Tu as gagné en " + coups + " coups.");
+		if(valideJoueur == combinaisonIA.length)
+		{
+			System.out.println("Tu as gagné en " + coups + " coups.");
+		}
+		else
+		{
+			System.out.println("Tu as perdu, la combinaison de l'IA était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+		}
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
@@ -88,7 +95,7 @@ public class RecherchePlusMoins implements Jeux {
 		byte valideIA = 0;
 		int coups = 0;
 
-		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9, ce sera ta combinaison.";
+		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9, ce sera ta combinaison.\n";
 		texteChoix += "\t\t";
 
 		// On règle les valeurs minimals et maximals de la combinaison
@@ -99,7 +106,7 @@ public class RecherchePlusMoins implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Recherche Plus ou Moins : Défenseur");
-		System.out.println("Trouver la combinaison du joueur");
+		System.out.println("L'IA doit trouvé la combinaison du joueur en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// On demande au joueur de rentrer un combinaison
@@ -121,7 +128,14 @@ public class RecherchePlusMoins implements Jeux {
 			System.out.println();
 		}while(valideIA != combinaisonJoueur.length && coups < instanceProprieteApplication.getCoupsMax());
 
-		System.out.println("Tu as gagné en " + coups + " coups.");
+		if(valideIA == combinaisonJoueur.length)
+		{
+			System.out.println("L'IA a gagné en " + coups + " coups.");
+		}
+		else
+		{
+			System.out.println("L'IA a perdu.");
+		}
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
@@ -143,7 +157,7 @@ public class RecherchePlusMoins implements Jeux {
 		byte valideIA = 0;
 		int coups = 0;
 
-		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9, ce sera ta combinaison.";
+		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à 9, ce sera ta combinaison.\n";
 		texteChoix += "\t\t";
 
 		// On règle les valeurs minimals et maximals de la combinaison
@@ -210,17 +224,18 @@ public class RecherchePlusMoins implements Jeux {
 				System.out.println();
 			}while(valideJoueur != combinaisonIA.length && valideIA != combinaisonJoueur.length && coups < instanceProprieteApplication.getCoupsMax());
 		}
-		if(valideJoueur == combinaisonIA.length && valideIA == combinaisonJoueur.length)
-		{
-			System.out.println("Match nul en " + coups + " coups.");			
-		}
-		else if(valideJoueur == combinaisonIA.length)
+
+		if(valideJoueur == combinaisonIA.length && valideIA != combinaisonJoueur.length)
 		{
 			System.out.println("Tu as gagné en " + coups + " coups.");
 		}
-		else if(valideIA == combinaisonJoueur.length)
+		else if(valideJoueur != combinaisonIA.length && valideIA == combinaisonJoueur.length)
 		{
 			System.out.println("L'IA a gagné en " + coups + " coups, sa combinaison était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+		}
+		else
+		{
+			System.out.println("Match nul en " + coups + " coups, la combinaison de l'IA était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");			
 		}
 		System.out.println();
 

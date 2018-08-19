@@ -43,7 +43,7 @@ public class Mastermind implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Mastermind : Challenger");
-		System.out.println("Trouver la combinaison de l'IA");
+		System.out.println("Trouver la combinaison de l'IA en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// Génération d'une combinaison
@@ -75,7 +75,14 @@ public class Mastermind implements Jeux {
 			System.out.println();
 		}while(valideJoueur != combinaisonIA.length && coups < instanceProprieteApplication.getCoupsMax());
 
-		System.out.println("Tu as gagné en " + coups + " coups.");
+		if(valideJoueur == combinaisonIA.length)
+		{
+			System.out.println("Tu as gagné en " + coups + " coups.");
+		}
+		else
+		{
+			System.out.println("Tu as perdu, la combinaison de l'IA était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+		}
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
@@ -93,7 +100,7 @@ public class Mastermind implements Jeux {
 		byte nombreValeur = instanceProprieteApplication.getNombreValeur();
 		int coups = 0;
 
-		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + ", ce sera ta combinaison.";
+		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + ", ce sera ta combinaison.\n";
 		texteChoix += "\t\t";
 
 		IndicesMastermind mesNouvellesVariables = new IndicesMastermind();
@@ -139,7 +146,7 @@ public class Mastermind implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Mastermind : Défenseur");
-		System.out.println("Trouver la combinaison du joueur");
+		System.out.println("L'IA doit trouvé la combinaison du joueur en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// On demande au joueur de rentrer une combinaison
@@ -195,7 +202,7 @@ public class Mastermind implements Jeux {
 		byte nombreValeur = instanceProprieteApplication.getNombreValeur();
 		int coups = 0;
 
-		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + ", ce sera ta combinaison.";
+		texteChoix += "\tTapes une suite de " + combinaisonJoueur.length + " chiffres avec des chiffres de 0 à " + (nombreValeur - 1)  + ", ce sera ta combinaison.\n";
 		texteChoix += "\t\t";
 
 		IndicesMastermind mesNouvellesVariables = new IndicesMastermind();
@@ -241,7 +248,7 @@ public class Mastermind implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Mastermind : Duel");
-		System.out.println("Trouver la combinaison du joueur");
+		System.out.println("Trouver la combinaison de l'IA avant qu'elle ne trouve la tienne et ce en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// On demande au joueur de rentrer un combinaison
@@ -311,20 +318,20 @@ public class Mastermind implements Jeux {
 				System.out.println();
 			}while(valideJoueur != combinaisonIA.length && mesNouvellesVariables.valide != combinaisonJoueur.length && coups < instanceProprieteApplication.getCoupsMax());
 		}
-		if(valideJoueur == combinaisonIA.length && mesNouvellesVariables.valide == combinaisonJoueur.length)
-		{
-			System.out.println("Match nul en " + coups + " coups.");			
-		}
-		else if(valideJoueur == combinaisonIA.length)
+
+		if(valideJoueur == combinaisonIA.length && mesNouvellesVariables.valide != combinaisonJoueur.length)
 		{
 			System.out.println("Tu as gagné en " + coups + " coups.");
 		}
-		else if(mesNouvellesVariables.valide == combinaisonJoueur.length)
+		else if(valideJoueur != combinaisonIA.length && mesNouvellesVariables.valide == combinaisonJoueur.length)
 		{
 			System.out.println("L'IA a gagné en " + coups + " coups, sa combinaison était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
 		}
+		else
+		{
+			System.out.println("Match nul en " + coups + " coups, la combinaison de l'IA était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");			
+		}
 		System.out.println();
-
 
 		// Log pour afficher le début de la méthode
 		LogOutil.LOGGER.trace("Fin de la méthode Duel de la classe Mastermind.");
