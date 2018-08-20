@@ -7,7 +7,6 @@ import com.outils.EntreeUtilisateur;
 public class Main {
 	public static void main(String[] args) {
 
-
 		// Log pour afficher le début du programme
 		LogOutil.LOGGER.trace("Début du programme");
 
@@ -32,6 +31,7 @@ public class Main {
 			texteChoix += "\t\t";
 			System.out.print(texteChoix);
 			mesProprietes.setTailleCombinaison(instanceEntreeUtilisateur.lisValeur(1, 8, texteChoix));
+			System.out.println("");
 
 			// Remise à zéro de texteChoix
 			texteChoix = "";
@@ -42,6 +42,7 @@ public class Main {
 			texteChoix += "\t\t";
 			System.out.print(texteChoix);
 			mesProprietes.setCoupsMax(instanceEntreeUtilisateur.lisValeur(1, 30, texteChoix));
+			System.out.println("");
 
 			// Remise à zéro de texteChoix
 			texteChoix = "";
@@ -52,6 +53,7 @@ public class Main {
 			texteChoix += "\t\t";
 			System.out.print(texteChoix);
 			mesProprietes.setNombreValeur((byte) instanceEntreeUtilisateur.lisValeur(4, 10, texteChoix));
+			System.out.println("");
 		}
 
 		// On crée une instance de SelectionJeux

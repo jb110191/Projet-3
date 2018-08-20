@@ -108,7 +108,7 @@ public class EntreeUtilisateur {
 		texteChoix += "\t1 - Retour séléction du choix du mode\n";
 		texteChoix += "\t2 - Retour séléction du choix du jeu\n";
 		texteChoix += "\t3 - Quitter l'application\n";
-		texteChoix += "\t";
+		texteChoix += "\t\t";
 
 		// Affichage de la demande
 		System.out.print(texteChoix);

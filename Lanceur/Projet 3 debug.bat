@@ -1,2 +1,3 @@
-java -jar "Projet 3.jar"
+@echo off
+java -jar "Projet 3.jar" d
 pause

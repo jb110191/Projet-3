@@ -35,7 +35,7 @@ public class SelectionJeux {
 
 		Jeux monJeux;
 
-		//Boucle de do ... while, car elle doit s'éxécuté au moins un fois
+		//Boucle de do ... while, car elle doit s'éxécuté au moins une fois
 		// Switch pour le choix du jeux
 
 		// On crée une instance de SelectionModes
@@ -45,7 +45,7 @@ public class SelectionJeux {
 		texteChoix += "Choisis le jeux\n";
 		texteChoix += "\t1 - Recherche +/-\n";
 		texteChoix += "\t2 - Mastermind\n";
-		texteChoix += "\t";
+		texteChoix += "\t\t";
 
 		do
 		{
@@ -54,12 +54,7 @@ public class SelectionJeux {
 			do
 			{	
 				// Récupération du choix
-				choix = instanceEntreeUtilisateur.lisEntree(1, 2, texteChoix);
-
-				if(choix != 1 && choix != 2)
-				{
-					System.out.println("Veuillez entrer une valeur valide");
-				}
+				choix = instanceEntreeUtilisateur.lisValeur(1, 2, texteChoix);
 			}while(choix != 1 && choix != 2);
 			System.out.println();
 

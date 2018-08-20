@@ -40,7 +40,7 @@ public class SelectionModes {
 		texteChoix += "\t1 - Challenger\n";
 		texteChoix += "\t2 - Défenseur\n";
 		texteChoix += "\t3 - Duel\n";
-		texteChoix += "\t";
+		texteChoix += "\t\t";
 
 		do
 		{
@@ -51,7 +51,7 @@ public class SelectionModes {
 			do
 			{
 				// Récupération du choix
-				choix = instanceEntreeUtilisateur.lisEntree(1, 3, texteChoix);
+				choix = instanceEntreeUtilisateur.lisValeur(1, 3, texteChoix);
 
 				switch(choix)
 				{
