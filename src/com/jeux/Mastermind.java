@@ -29,7 +29,7 @@ public class Mastermind implements Jeux {
 
 	public void Challenger() {
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Début de la méthode Challenger de la classe Mastermind.");
+		LogOutil.instanceLogger.trace("Début de la méthode Challenger de la classe Mastermind.");
 
 		// Déclaration de variable
 		byte combinaisonIA[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
@@ -50,7 +50,7 @@ public class Mastermind implements Jeux {
 		instanceMethodesOutils.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
 
 		// Affichage de la combinaison en mode Debug
-		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		if(LogOutil.instanceLogger.isDebugEnabled() == true)
 		{
 			instanceMethodesOutils.affichageDebug(combinaisonIA);
 		}
@@ -66,7 +66,7 @@ public class Mastermind implements Jeux {
 			 * Log
 			 * pour afficher le tour
 			 */
-			LogOutil.LOGGER.trace("Tour " + coups);
+			LogOutil.instanceLogger.trace("Tour " + coups);
 
 			// On appelle tourJoueur
 			valideJoueur = tourJoueur(combinaisonIA, proposition, nombreValeur);
@@ -86,12 +86,12 @@ public class Mastermind implements Jeux {
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Fin de la méthode Challenger de la classe Mastermind.");
+		LogOutil.instanceLogger.trace("Fin de la méthode Challenger de la classe Mastermind.");
 	}
 
 	public void Defenseur() {
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe Mastermind.");
+		LogOutil.instanceLogger.trace("Début de la méthode Defenseur de la classe Mastermind.");
 
 		// Déclaration de variable
 		String texteChoix = "";
@@ -117,7 +117,7 @@ public class Mastermind implements Jeux {
 		 * Log
 		 * pour vérifier les combinaisons dans listesPossibles
 		 */
-		if(LogOutil.LOGGER.isTraceEnabled() == true)
+		if(LogOutil.instanceLogger.isTraceEnabled() == true)
 		{
 			String str = "La listes des ";
 			str += listesPossibles.size();
@@ -138,7 +138,7 @@ public class Mastermind implements Jeux {
 					str += listesPossibles.get(i).get(j);
 				}
 			}
-			LogOutil.LOGGER.trace(str);
+			LogOutil.instanceLogger.trace(str);
 		}
 
 		/*
@@ -165,7 +165,7 @@ public class Mastermind implements Jeux {
 			 * Log
 			 * pour afficher le tour
 			 */
-			LogOutil.LOGGER.trace("Tour " + coups);
+			LogOutil.instanceLogger.trace("Tour " + coups);
 
 
 			// On appelle tourIA
@@ -186,12 +186,12 @@ public class Mastermind implements Jeux {
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe Mastermind.");
+		LogOutil.instanceLogger.trace("Fin de la méthode Defenseur de la classe Mastermind.");
 	}
 
 	public void Duel() {
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Début de la méthode Duel de la classe Mastermind.");
+		LogOutil.instanceLogger.trace("Début de la méthode Duel de la classe Mastermind.");
 
 		// Déclaration de variable
 		String texteChoix = "";
@@ -219,7 +219,7 @@ public class Mastermind implements Jeux {
 		 * Log
 		 * pour vérifier les combinaisons dans listesPossibles
 		 */
-		if(LogOutil.LOGGER.isTraceEnabled() == true)
+		if(LogOutil.instanceLogger.isTraceEnabled() == true)
 		{
 			String str = "La listes des ";
 			str += listesPossibles.size();
@@ -240,7 +240,7 @@ public class Mastermind implements Jeux {
 					str += listesPossibles.get(i).get(j);
 				}
 			}
-			LogOutil.LOGGER.trace(str);
+			LogOutil.instanceLogger.trace(str);
 		}
 
 		/*
@@ -260,7 +260,7 @@ public class Mastermind implements Jeux {
 		instanceMethodesOutils.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
 
 		// Affichage de la combinaison en mode Debug
-		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		if(LogOutil.instanceLogger.isDebugEnabled() == true)
 		{
 			instanceMethodesOutils.affichageDebug(combinaisonIA);
 		}
@@ -280,7 +280,7 @@ public class Mastermind implements Jeux {
 				 * Log
 				 * pour afficher le tour
 				 */
-				LogOutil.LOGGER.trace("Tour " + coups);
+				LogOutil.instanceLogger.trace("Tour " + coups);
 
 				// On appelle tourJoueur
 				valideJoueur = tourJoueur(combinaisonIA, proposition, nombreValeur);
@@ -306,7 +306,7 @@ public class Mastermind implements Jeux {
 				 * Log
 				 * pour afficher le tour
 				 */
-				LogOutil.LOGGER.trace("Tour " + coups);
+				LogOutil.instanceLogger.trace("Tour " + coups);
 
 				// On appelle tourIA
 				tourIA(listesPossibles, chiffrePossible, chiffreTrouve, combinaisonJoueur, proposition, mesNouvellesVariables, mesAnciennesVariables, coups);
@@ -334,7 +334,7 @@ public class Mastermind implements Jeux {
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Fin de la méthode Duel de la classe Mastermind.");
+		LogOutil.instanceLogger.trace("Fin de la méthode Duel de la classe Mastermind.");
 	}
 
 	// Méthode de tour
@@ -370,7 +370,7 @@ public class Mastermind implements Jeux {
 		 * Log
 		 * pour vérifier les valides est malPlacé
 		 */
-		if(LogOutil.LOGGER.isTraceEnabled() == true)
+		if(LogOutil.instanceLogger.isTraceEnabled() == true)
 		{
 			String str = "Valeur des valides et malPlacés";
 
@@ -383,7 +383,7 @@ public class Mastermind implements Jeux {
 			str += "\n\t\t";
 			str += "pMesAnciennesVariables.malPlace " + pMesAnciennesVariables.malPlace;
 
-			LogOutil.LOGGER.trace(str);
+			LogOutil.instanceLogger.trace(str);
 		}
 
 		// On déplace les valide et malPlace pour le prochain coup
@@ -407,7 +407,7 @@ public class Mastermind implements Jeux {
 				/*
 				 * Test
 				 */
-				LogOutil.LOGGER.trace("pChiffrePossible.size() = " + pChiffrePossible.size());
+				LogOutil.instanceLogger.trace("pChiffrePossible.size() = " + pChiffrePossible.size());
 
 				// On déroule les valeurs dans la liste des possibles
 				for(int i = 0; i < pListesPossibles.size(); i++)
@@ -427,7 +427,7 @@ public class Mastermind implements Jeux {
 					if(nombreIndiceCombinaison != nombreNouveauxIndices)
 					{
 
-						if(LogOutil.LOGGER.isTraceEnabled() == true)
+						if(LogOutil.instanceLogger.isTraceEnabled() == true)
 						{
 							String str = "La combinaisons ";
 
@@ -442,7 +442,7 @@ public class Mastermind implements Jeux {
 							str += "_ au lieux de ";
 							str += nombreNouveauxIndices;
 							str += ".";
-							LogOutil.LOGGER.trace(str);
+							LogOutil.instanceLogger.trace(str);
 						}
 						pListesPossibles.remove(i);
 						i--;
@@ -460,7 +460,7 @@ public class Mastermind implements Jeux {
 			 * Log
 			 * pour vérifier les combinaisons dans listesPossibles
 			 */
-			if(LogOutil.LOGGER.isTraceEnabled() == true)
+			if(LogOutil.instanceLogger.isTraceEnabled() == true)
 			{
 				String str = "La listes des ";
 				str += pListesPossibles.size();
@@ -481,7 +481,7 @@ public class Mastermind implements Jeux {
 						str += pListesPossibles.get(i).get(j);
 					}
 				}
-				LogOutil.LOGGER.trace(str);
+				LogOutil.instanceLogger.trace(str);
 			}
 		}
 

@@ -1,14 +1,19 @@
 package com.main;
 
+import com.outils.ParametresLancement;
 import com.logoutil.LogOutil;
 import com.outils.ProprieteApplication;
 import com.outils.EntreeUtilisateur;
 
 public class Main {
 	public static void main(String[] args) {
+		// Gestion du niveau de log
+		ParametresLancement mesParametresLancement = new ParametresLancement();
+
+		mesParametresLancement.guereParametreApplication(args);
 
 		// Log pour afficher le début du programme
-		LogOutil.LOGGER.trace("Début du programme");
+		LogOutil.instanceLogger.trace("Début du programme");
 
 		// Affichage de l'entrée du programme
 		System.out.println("Bienvenue dans l'application Recherche +/- ou Mastermind");
@@ -19,7 +24,7 @@ public class Main {
 		mesProprietes.recupereProprieteApplication();
 
 		// On demande le mode debug
-		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		if(LogOutil.instanceLogger.isDebugEnabled() == true)
 		{
 			String texteChoix = "";
 
@@ -66,6 +71,6 @@ public class Main {
 		System.out.println("J'espère que le jeux t'as amusé.");
 
 		// Log pour afficher la fin du programme
-		LogOutil.LOGGER.trace("Fin du programme");
+		LogOutil.instanceLogger.trace("Fin du programme");		
 	}
 }

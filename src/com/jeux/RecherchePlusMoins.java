@@ -29,7 +29,7 @@ public class RecherchePlusMoins implements Jeux {
 
 	public void Challenger () {
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Début de la méthode Challenger de la classe RecherchePlusMoins.");
+		LogOutil.instanceLogger.trace("Début de la méthode Challenger de la classe RecherchePlusMoins.");
 
 		// Déclaration de variable
 		byte combinaisonIA[] = new byte[instanceProprieteApplication.getTailleCombinaison()];
@@ -49,7 +49,7 @@ public class RecherchePlusMoins implements Jeux {
 		instanceMethodesOutils.genereCombinaison(combinaisonIA);
 
 		// Affichage de la combinaison en mode Debug
-		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		if(LogOutil.instanceLogger.isDebugEnabled() == true)
 		{
 			instanceMethodesOutils.affichageDebug(combinaisonIA);
 		}
@@ -79,12 +79,12 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Fin de la méthode Challenger de la classe RecherchePlusMoins.");
+		LogOutil.instanceLogger.trace("Fin de la méthode Challenger de la classe RecherchePlusMoins.");
 	}
 
 	public void Defenseur() {
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Début de la méthode Defenseur de la classe RecherchePlusMoins.");
+		LogOutil.instanceLogger.trace("Début de la méthode Defenseur de la classe RecherchePlusMoins.");
 
 		// Déclaration de variable
 		String texteChoix = "";
@@ -139,12 +139,12 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Fin de la méthode Defenseur de la classe RecherchePlusMoins.");
+		LogOutil.instanceLogger.trace("Fin de la méthode Defenseur de la classe RecherchePlusMoins.");
 	}
 
 	public void Duel () {
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Début de la méthode Duel de la classe RecherchePlusMoins.");
+		LogOutil.instanceLogger.trace("Début de la méthode Duel de la classe RecherchePlusMoins.");
 
 		// Déclaration de variable
 		String texteChoix = "";
@@ -180,7 +180,7 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 
 		// Affichage de la combinaison en mode Debug
-		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		if(LogOutil.instanceLogger.isDebugEnabled() == true)
 		{
 			instanceMethodesOutils.affichageDebug(combinaisonIA);
 		}
@@ -240,7 +240,7 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 
 		// Log pour afficher le début de la méthode
-		LogOutil.LOGGER.trace("Fin de la méthode Duel de la classe RecherchePlusMoins.");
+		LogOutil.instanceLogger.trace("Fin de la méthode Duel de la classe RecherchePlusMoins.");
 	}
 
 	// Méthode de tour

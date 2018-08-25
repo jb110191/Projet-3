@@ -57,7 +57,7 @@ public class ProprieteApplication {
     Pour le Mastermind :
         le nombre couleur/chiffre utilisables (de 4 à 10)
 	 */
-	
+
 	// Récupération des proptiétés par un fichier .properties
 	public  void recupereProprieteApplication ()
 	{
@@ -71,7 +71,7 @@ public class ProprieteApplication {
 			coupsMax = maConfig.getInt("coupsMax");
 			nombreValeur = maConfig.getByte("nombreValeur");
 		} catch (ConfigurationException e) {
-			LogOutil.LOGGER.trace("Problème lors de la récupération des propriétés de l'application");
+			LogOutil.instanceLogger.trace("Problème lors de la récupération des propriétés de l'application");
 			tailleCombinaison = 4;
 			coupsMax = 10;
 			nombreValeur = 4;

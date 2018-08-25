@@ -165,7 +165,7 @@ public class MethodesOutils {
 	public void reglageListePossible(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, int pTailleCombinaison, byte pNombreValeur) {		
 
 		//On met les chiffres dans un ordre
-		if(LogOutil.LOGGER.isDebugEnabled() == true)
+		if(LogOutil.instanceLogger.isDebugEnabled() == true)
 		{
 			reglageListeOrdre(pChiffrePossible, pNombreValeur);
 		}
