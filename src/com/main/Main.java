@@ -1,16 +1,27 @@
 package com.main;
 
 import com.outils.ParametresLancement;
+
+import org.apache.logging.log4j.LogManager;
+
 import com.logoutil.LogOutil;
 import com.outils.ProprieteApplication;
 import com.outils.EntreeUtilisateur;
 
 public class Main {
 	public static void main(String[] args) {
-		// Gestion du niveau de log
+		// Gestion de mesParametresLancement
 		ParametresLancement mesParametresLancement = new ParametresLancement();
-
 		mesParametresLancement.gereParametreApplication(args);
+		
+		//On crée un instance ProprieteApplication puis on récupère les propriétés
+		ProprieteApplication mesProprietes = new ProprieteApplication();
+		mesProprietes.recupereProprieteApplication();
+		
+		if(mesProprietes.getModeDev())
+		{
+			LogOutil.instanceLogger = LogManager.getLogger("debug");
+		}
 
 		// Log pour afficher le début du programme
 		LogOutil.instanceLogger.trace("Début du programme");
@@ -19,47 +30,40 @@ public class Main {
 		System.out.println("Bienvenue dans l'application Recherche +/- ou Mastermind");
 		System.out.println();
 
-		//On crée un instance ProprieteApplication puis on récupère les propriétés
-		ProprieteApplication mesProprietes = new ProprieteApplication();
-		mesProprietes.recupereProprieteApplication();
-
 		// On demande le mode debug
-		if(LogOutil.instanceLogger.isDebugEnabled() == true)
-		{
-			String texteChoix = "";
+		String texteChoix = "";
 
-			EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur();
+		EntreeUtilisateur instanceEntreeUtilisateur = new EntreeUtilisateur();
 
-			// tailleCombinaison
-			texteChoix += "Choissisez la taille de la combinaison pour le Recherche +/- et le Mastermind\n";
-			texteChoix += "\tValeur de 1 à 8\n";
-			texteChoix += "\t\t";
-			System.out.print(texteChoix);
-			mesProprietes.setTailleCombinaison(instanceEntreeUtilisateur.lisValeur(1, 8, texteChoix));
-			System.out.println("");
+		// tailleCombinaison
+		texteChoix += "Choissisez la taille de la combinaison pour le Recherche +/- et le Mastermind\n";
+		texteChoix += "\tValeur de 1 à 8\n";
+		texteChoix += "\t\t";
+		System.out.print(texteChoix);
+		mesProprietes.setTailleCombinaison(instanceEntreeUtilisateur.lisValeur(1, 8, texteChoix));
+		System.out.println("");
 
-			// Remise à zéro de texteChoix
-			texteChoix = "";
+		// Remise à zéro de texteChoix
+		texteChoix = "";
 
-			// coupsMax
-			texteChoix += "Choissisez le nombre de coups maximal pour le Recherche +/- et le Mastermind\n";
-			texteChoix += "\tValeur de 1 à 30\n";
-			texteChoix += "\t\t";
-			System.out.print(texteChoix);
-			mesProprietes.setCoupsMax(instanceEntreeUtilisateur.lisValeur(1, 30, texteChoix));
-			System.out.println("");
+		// coupsMax
+		texteChoix += "Choissisez le nombre de coups maximal pour le Recherche +/- et le Mastermind\n";
+		texteChoix += "\tValeur de 1 à 30\n";
+		texteChoix += "\t\t";
+		System.out.print(texteChoix);
+		mesProprietes.setCoupsMax(instanceEntreeUtilisateur.lisValeur(1, 30, texteChoix));
+		System.out.println("");
 
-			// Remise à zéro de texteChoix
-			texteChoix = "";
+		// Remise à zéro de texteChoix
+		texteChoix = "";
 
-			// nombreValeur
-			texteChoix += "Choissisez le nombre de valeur pour le Mastermind\n";
-			texteChoix += "\tValeur de 4 à 10\n";
-			texteChoix += "\t\t";
-			System.out.print(texteChoix);
-			mesProprietes.setNombreValeur((byte) instanceEntreeUtilisateur.lisValeur(4, 10, texteChoix));
-			System.out.println("");
-		}
+		// nombreValeur
+		texteChoix += "Choissisez le nombre de valeur pour le Mastermind\n";
+		texteChoix += "\tValeur de 4 à 10\n";
+		texteChoix += "\t\t";
+		System.out.print(texteChoix);
+		mesProprietes.setNombreValeur((byte) instanceEntreeUtilisateur.lisValeur(4, 10, texteChoix));
+		System.out.println("");
 
 		// On crée une instance de SelectionJeux
 		SelectionJeux slctJx = new SelectionJeux();

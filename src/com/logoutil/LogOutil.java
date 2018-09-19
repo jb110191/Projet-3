@@ -8,10 +8,10 @@ public class LogOutil {
 	public static Logger instanceLogger;
 
 	// Méhtode guerant le logger
-	public void guereLogOutil() {
+	public void gereLogOutil() {
 		instanceLogger = LogManager.getLogger();
 	}
-	public void guereLogOutil(String nomLogger) {
+	public void gereLogOutil(String nomLogger) {
 		instanceLogger = LogManager.getLogger(nomLogger);
 	}
 }

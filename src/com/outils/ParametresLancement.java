@@ -9,11 +9,11 @@ public class ParametresLancement {
 
 		try
 		{
-			monLogOutil.guereLogOutil(pArgs[0]);
+			monLogOutil.gereLogOutil(pArgs[0]);
 		}
 		catch(ArrayIndexOutOfBoundsException e)
 		{
-			monLogOutil.guereLogOutil();
+			monLogOutil.gereLogOutil();
 		}
 	}
 }

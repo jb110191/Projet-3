@@ -12,6 +12,7 @@ public class ProprieteApplication {
 	 */
 
 	//Les propiétés récupéré de l'application
+	static boolean modeDev;
 	static int tailleCombinaison;
 	static int coupsMax;
 	static byte nombreValeur;
@@ -25,6 +26,10 @@ public class ProprieteApplication {
 	 */
 
 	// Accesseur
+	public boolean getModeDev() {
+		return modeDev;
+	}
+	
 	public int getTailleCombinaison() {
 		return tailleCombinaison;
 	}
@@ -66,12 +71,14 @@ public class ProprieteApplication {
 
 		try {
 			maConfig = configs.properties("config.properties");
-
+			
+			modeDev = maConfig.getBoolean("modeDev");
 			tailleCombinaison = maConfig.getInt("tailleCombinaison");
 			coupsMax = maConfig.getInt("coupsMax");
 			nombreValeur = maConfig.getByte("nombreValeur");
 		} catch (ConfigurationException e) {
 			LogOutil.instanceLogger.trace("Problème lors de la récupération des propriétés de l'application");
+			modeDev = false;
 			tailleCombinaison = 4;
 			coupsMax = 10;
 			nombreValeur = 4;
