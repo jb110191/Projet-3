@@ -1,8 +1,8 @@
 package com.main;
 
 import com.jeux.Jeux;
-import com.jeux.Mastermind;
-import com.jeux.RecherchePlusMoins;
+import com.jeux.mastermind.Mastermind;
+import com.jeux.recherchePlusMoins.RecherchePlusMoins;
 import com.outils.EntreeUtilisateur;
 import com.outils.Rejouer;
 

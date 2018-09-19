@@ -10,7 +10,7 @@ public class Main {
 		// Gestion du niveau de log
 		ParametresLancement mesParametresLancement = new ParametresLancement();
 
-		mesParametresLancement.guereParametreApplication(args);
+		mesParametresLancement.gereParametreApplication(args);
 
 		// Log pour afficher le début du programme
 		LogOutil.instanceLogger.trace("Début du programme");

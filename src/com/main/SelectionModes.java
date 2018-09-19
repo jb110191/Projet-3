@@ -1,7 +1,7 @@
 package com.main;
 
 import com.jeux.Jeux;
-import com.jeux.RecherchePlusMoins;
+import com.jeux.recherchePlusMoins.RecherchePlusMoins;
 import com.outils.EntreeUtilisateur;
 import com.outils.Rejouer;
 
@@ -59,7 +59,7 @@ public class SelectionModes {
 					do
 					{
 						System.out.println();
-						pMonJeux.Challenger();
+						pMonJeux.challenger();
 						instanceRejouer.setChoix(instanceEntreeUtilisateur.demandeRejouer());
 					}while(instanceRejouer.getChoix() == 0);
 					break;
@@ -67,7 +67,7 @@ public class SelectionModes {
 					do
 					{
 						System.out.println();
-						pMonJeux.Defenseur();
+						pMonJeux.defenseur();
 						instanceRejouer.setChoix(instanceEntreeUtilisateur.demandeRejouer());
 					}while(instanceRejouer.getChoix() == 0);
 					break;
@@ -75,7 +75,7 @@ public class SelectionModes {
 					do
 					{
 						System.out.println();
-						pMonJeux.Duel();
+						pMonJeux.duel();
 						instanceRejouer.setChoix(instanceEntreeUtilisateur.demandeRejouer());
 					}while(instanceRejouer.getChoix() == 0);
 					break;

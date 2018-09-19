@@ -1,12 +1,17 @@
-package com.jeux;
+package com.jeux.recherchePlusMoins;
 
+import com.jeux.Jeux;
 import com.logoutil.LogOutil;
+import com.outils.ReglageMinMax;
 
 public class RecherchePlusMoins implements Jeux {
 	/*
 	 * Variable de classe
 	 */
-	//
+	
+	AfficheReponseR instanceAfficheReponseR = new AfficheReponseR();
+	ReglageMinMax instanceReglageMinMax =  new ReglageMinMax();
+	
 
 	/*
 	 * Constructeur
@@ -27,7 +32,7 @@ public class RecherchePlusMoins implements Jeux {
 	 * 		- si le chiffre de la combinaison est inférieur
 	 */
 
-	public void Challenger () {
+	public void challenger () {
 		// Log pour afficher le début de la méthode
 		LogOutil.instanceLogger.trace("Début de la méthode Challenger de la classe RecherchePlusMoins.");
 
@@ -46,7 +51,7 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 
 		// Génération d'une combinaison
-		instanceMethodesOutils.genereCombinaison(combinaisonIA);
+		instanceGenereCombinaison.genereCombinaison(combinaisonIA);
 
 		// Affichage de la combinaison en mode Debug
 		if(LogOutil.instanceLogger.isDebugEnabled() == true)
@@ -74,7 +79,7 @@ public class RecherchePlusMoins implements Jeux {
 		}
 		else
 		{
-			System.out.println("Tu as perdu, la combinaison de l'IA était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+			System.out.println("Tu as perdu, la combinaison de l'IA était " + instanceCombinaisonTexte.combinaisonTexte(combinaisonIA) + ".");
 		}
 		System.out.println();
 
@@ -82,7 +87,7 @@ public class RecherchePlusMoins implements Jeux {
 		LogOutil.instanceLogger.trace("Fin de la méthode Challenger de la classe RecherchePlusMoins.");
 	}
 
-	public void Defenseur() {
+	public void defenseur() {
 		// Log pour afficher le début de la méthode
 		LogOutil.instanceLogger.trace("Début de la méthode Defenseur de la classe RecherchePlusMoins.");
 
@@ -99,7 +104,7 @@ public class RecherchePlusMoins implements Jeux {
 		texteChoix += "\t\t";
 
 		// On règle les valeurs minimals et maximals de la combinaison
-		instanceMethodesOutils.reglageMinMax(min, max);
+		instanceReglageMinMax.reglageMinMax(min, max);
 
 		/*
 		 * A mettre dans selection de jeux ?
@@ -142,7 +147,7 @@ public class RecherchePlusMoins implements Jeux {
 		LogOutil.instanceLogger.trace("Fin de la méthode Defenseur de la classe RecherchePlusMoins.");
 	}
 
-	public void Duel () {
+	public void duel () {
 		// Log pour afficher le début de la méthode
 		LogOutil.instanceLogger.trace("Début de la méthode Duel de la classe RecherchePlusMoins.");
 
@@ -161,7 +166,7 @@ public class RecherchePlusMoins implements Jeux {
 		texteChoix += "\t\t";
 
 		// On règle les valeurs minimals et maximals de la combinaison
-		instanceMethodesOutils.reglageMinMax(min, max);
+		instanceReglageMinMax.reglageMinMax(min, max);
 
 		/*
 		 * A mettre dans selection de jeux ?
@@ -172,7 +177,7 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.println();
 
 		// La combinaison de l'IA est gèneré et on en demande une au joueur
-		instanceMethodesOutils.genereCombinaison(combinaisonIA);
+		instanceGenereCombinaison.genereCombinaison(combinaisonIA);
 
 		// On demande au joueur de rentrer un combinaison
 		System.out.print(texteChoix);
@@ -186,7 +191,7 @@ public class RecherchePlusMoins implements Jeux {
 		}
 
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
-		if(instanceMethodesOutils.zeroUn() == 1)
+		if(instanceZeroUn.zeroUn() == 1)
 		{
 			System.out.println("Le joueur joue en premier.");
 			System.out.println();
@@ -231,11 +236,11 @@ public class RecherchePlusMoins implements Jeux {
 		}
 		else if(valideJoueur != combinaisonIA.length && valideIA == combinaisonJoueur.length)
 		{
-			System.out.println("L'IA a gagné en " + coups + " coups, sa combinaison était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+			System.out.println("L'IA a gagné en " + coups + " coups, sa combinaison était " + instanceCombinaisonTexte.combinaisonTexte(combinaisonIA) + ".");
 		}
 		else
 		{
-			System.out.println("Match nul en " + coups + " coups, la combinaison de l'IA était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");			
+			System.out.println("Match nul en " + coups + " coups, la combinaison de l'IA était " + instanceCombinaisonTexte.combinaisonTexte(combinaisonIA) + ".");			
 		}
 		System.out.println();
 
@@ -255,11 +260,11 @@ public class RecherchePlusMoins implements Jeux {
 		System.out.print(texteChoix);
 
 		// Lis l'entrée de l'utilisateur
-		instanceEntreeUtilisateur.lisCombinaison(pProposition, 9, texteChoix);	
+		instanceEntreeUtilisateur.lisCombinaison(pProposition, 9, texteChoix);
 
 		// On affiche la réponse à la proposition du joueur
 		System.out.print("\t\tRéponse ");
-		return instanceMethodesOutils.afficheReponseR(pCombinaisonIA, pProposition);
+		return instanceAfficheReponseR.afficheReponseR(pCombinaisonIA, pProposition);
 	}
 
 	protected byte tourIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {
@@ -270,11 +275,11 @@ public class RecherchePlusMoins implements Jeux {
 		joueIA(pCombinaisonJoueur, pProposition, pMin, pMax);
 
 		// On affiche la proposition de l'IA
-		System.out.println("\t\tL'IA propose " + instanceMethodesOutils.combinaisonTexte(pProposition));
+		System.out.println("\t\tL'IA propose " + instanceCombinaisonTexte.combinaisonTexte(pProposition));
 
 		// On affiche la réponse à la proposition de l'IA
 		System.out.print("\t\tRéponse ");
-		return instanceMethodesOutils.afficheReponseR(pCombinaisonJoueur, pProposition);
+		return instanceAfficheReponseR.afficheReponseR(pCombinaisonJoueur, pProposition);
 	}
 
 	protected void joueIA(byte pCombinaisonJoueur[], byte pProposition[], byte pMin[], byte pMax[]) {

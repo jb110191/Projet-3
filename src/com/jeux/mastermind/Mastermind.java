@@ -1,16 +1,21 @@
-package com.jeux;
+package com.jeux.mastermind;
 
 import java.util.ArrayList;
 
-import com.logoutil.*;
-import com.outils.*;
+import com.jeux.Jeux;
+import com.logoutil.LogOutil;
+import com.outils.IndicesMastermind;
+import com.reglageListe.ReglageListePossible;
 
 public class Mastermind implements Jeux {
 	/*
 	 * Variable de classe
 	 */
-	//
 
+	AfficheReponseM instanceAfficheReponseM = new AfficheReponseM();
+	GereMastermindVariable instanceGereMastermindVariable = new GereMastermindVariable();
+	ReglageListePossible instanceReglageListePossible = new ReglageListePossible();
+	
 	/*
 	 * Constructeur
 	 */
@@ -26,8 +31,7 @@ public class Mastermind implements Jeux {
 	 * Trouver une combinanaison de 4 chiffres
 	 * Le jeux affiche le nombre de chiffre au bonne emplacement et le nombre de chiffre au mauvais emplacement
 	 */
-
-	public void Challenger() {
+	public void challenger() {
 		// Log pour afficher le début de la méthode
 		LogOutil.instanceLogger.trace("Début de la méthode Challenger de la classe Mastermind.");
 
@@ -47,7 +51,7 @@ public class Mastermind implements Jeux {
 		System.out.println();
 
 		// Génération d'une combinaison
-		instanceMethodesOutils.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
+		instanceGenereCombinaison.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
 
 		// Affichage de la combinaison en mode Debug
 		if(LogOutil.instanceLogger.isDebugEnabled() == true)
@@ -81,7 +85,7 @@ public class Mastermind implements Jeux {
 		}
 		else
 		{
-			System.out.println("Tu as perdu, la combinaison de l'IA était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+			System.out.println("Tu as perdu, la combinaison de l'IA était " + instanceCombinaisonTexte.combinaisonTexte(combinaisonIA) + ".");
 		}
 		System.out.println();
 
@@ -89,7 +93,7 @@ public class Mastermind implements Jeux {
 		LogOutil.instanceLogger.trace("Fin de la méthode Challenger de la classe Mastermind.");
 	}
 
-	public void Defenseur() {
+	public void defenseur() {
 		// Log pour afficher le début de la méthode
 		LogOutil.instanceLogger.trace("Début de la méthode Defenseur de la classe Mastermind.");
 
@@ -111,7 +115,7 @@ public class Mastermind implements Jeux {
 		ArrayList <Integer> chiffreTrouve = new ArrayList <Integer>();
 
 		// On initialise listePossible
-		instanceMethodesOutils.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
+		instanceReglageListePossible.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
 
 		/*
 		 * Log
@@ -189,7 +193,7 @@ public class Mastermind implements Jeux {
 		LogOutil.instanceLogger.trace("Fin de la méthode Defenseur de la classe Mastermind.");
 	}
 
-	public void Duel() {
+	public void duel() {
 		// Log pour afficher le début de la méthode
 		LogOutil.instanceLogger.trace("Début de la méthode Duel de la classe Mastermind.");
 
@@ -213,7 +217,7 @@ public class Mastermind implements Jeux {
 		ArrayList <Integer> chiffreTrouve = new ArrayList <Integer>();
 
 		// On initialise listePossible
-		instanceMethodesOutils.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
+		instanceReglageListePossible.reglageListePossible(listesPossibles, chiffrePossible, combinaisonJoueur.length, nombreValeur);
 
 		/*
 		 * Log
@@ -257,7 +261,7 @@ public class Mastermind implements Jeux {
 		System.out.println();
 
 		// Génération d'une combinaison
-		instanceMethodesOutils.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
+		instanceGenereCombinaison.genereCombinaison(combinaisonIA, (byte) (nombreValeur-1));
 
 		// Affichage de la combinaison en mode Debug
 		if(LogOutil.instanceLogger.isDebugEnabled() == true)
@@ -266,7 +270,7 @@ public class Mastermind implements Jeux {
 		}
 
 		// Appelle sucessif des méthodes de tourJoueur et de tourIA
-		if(instanceMethodesOutils.zeroUn() == 1)
+		if(instanceZeroUn.zeroUn() == 1)
 		{
 			System.out.println("Le joueur joue en premier.");
 			System.out.println();
@@ -325,11 +329,11 @@ public class Mastermind implements Jeux {
 		}
 		else if(valideJoueur != combinaisonIA.length && mesNouvellesVariables.valide == combinaisonJoueur.length)
 		{
-			System.out.println("L'IA a gagné en " + coups + " coups, sa combinaison était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");
+			System.out.println("L'IA a gagné en " + coups + " coups, sa combinaison était " + instanceCombinaisonTexte.combinaisonTexte(combinaisonIA) + ".");
 		}
 		else
 		{
-			System.out.println("Match nul en " + coups + " coups, la combinaison de l'IA était " + instanceMethodesOutils.combinaisonTexte(combinaisonIA) + ".");			
+			System.out.println("Match nul en " + coups + " coups, la combinaison de l'IA était " + instanceCombinaisonTexte.combinaisonTexte(combinaisonIA) + ".");			
 		}
 		System.out.println();
 
@@ -353,7 +357,7 @@ public class Mastermind implements Jeux {
 
 		// On affiche la réponse à la proposition du joueur
 		System.out.print("\t\tRéponse ");
-		return instanceMethodesOutils.afficheReponseM(pCombinaisonIA, pProposition);
+		return instanceAfficheReponseM.afficheReponseM(pCombinaisonIA, pProposition);
 	}
 
 	protected void tourIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], IndicesMastermind pMesNouvellesVariables, IndicesMastermind pMesAnciennesVariables, int pCoups) {
@@ -364,7 +368,7 @@ public class Mastermind implements Jeux {
 		joueIA(pListesPossibles, pChiffrePossible, pChiffreTrouve, pCombinaisonJoueur, pProposition, pMesNouvellesVariables, pMesAnciennesVariables, pCoups);
 
 		// On affiche la proposition de l'IA
-		System.out.println("\t\tL'IA propose " + instanceMethodesOutils.combinaisonTexte(pProposition));
+		System.out.println("\t\tL'IA propose " + instanceCombinaisonTexte.combinaisonTexte(pProposition));
 
 		/*
 		 * Log
@@ -387,11 +391,11 @@ public class Mastermind implements Jeux {
 		}
 
 		// On déplace les valide et malPlace pour le prochain coup
-		instanceMethodesOutils.guereMastermindVariable(pMesNouvellesVariables, pMesAnciennesVariables);
+		instanceGereMastermindVariable.gereMastermindVariable(pMesNouvellesVariables, pMesAnciennesVariables);
 
 		// On affiche la réponse à la proposition de l'IA
 		System.out.print("\t\tRéponse ");
-		instanceMethodesOutils.afficheReponseM(pCombinaisonJoueur, pProposition, pMesNouvellesVariables);
+		instanceAfficheReponseM.afficheReponseM(pCombinaisonJoueur, pProposition, pMesNouvellesVariables);
 	}
 
 	protected void joueIA(ArrayList <ArrayList <Integer>> pListesPossibles, ArrayList <Integer> pChiffrePossible, ArrayList <Integer> pChiffreTrouve, byte pCombinaisonJoueur[], byte pProposition[], IndicesMastermind pMesNouvellesVariables, IndicesMastermind pMesAnciennesVariables, int pCoups) {

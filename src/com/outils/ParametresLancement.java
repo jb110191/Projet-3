@@ -3,7 +3,7 @@ package com.outils;
 import com.logoutil.LogOutil;
 
 public class ParametresLancement {
-	public void guereParametreApplication(String pArgs[]) {
+	public void gereParametreApplication(String pArgs[]) {
 		// Variable
 		LogOutil monLogOutil = new LogOutil();
 
