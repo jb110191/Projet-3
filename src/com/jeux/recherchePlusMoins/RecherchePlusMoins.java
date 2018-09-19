@@ -8,10 +8,10 @@ public class RecherchePlusMoins implements Jeux {
 	/*
 	 * Variable de classe
 	 */
-	
+
 	AfficheReponseR instanceAfficheReponseR = new AfficheReponseR();
 	ReglageMinMax instanceReglageMinMax =  new ReglageMinMax();
-	
+
 
 	/*
 	 * Constructeur
@@ -47,7 +47,7 @@ public class RecherchePlusMoins implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Recherche Plus ou Moins : Challenger");
-		System.out.println("Trouver la combinaison de l'IA en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
+		System.out.println("Trouver la combinaison de "+ instanceProprieteApplication.getTailleCombinaison() +" chiffre de l'IA en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// Génération d'une combinaison
@@ -173,7 +173,7 @@ public class RecherchePlusMoins implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Recherche Plus ou Moins : Duel");
-		System.out.println("Trouver la combinaison de l'IA avant qu'elle ne trouve la tienne.");
+		System.out.println("Trouver la combinaison "+ instanceProprieteApplication.getTailleCombinaison() +"  de l'IA avant qu'elle ne trouve la tienne et ce en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// La combinaison de l'IA est gèneré et on en demande une au joueur

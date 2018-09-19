@@ -15,7 +15,7 @@ public class Mastermind implements Jeux {
 	AfficheReponseM instanceAfficheReponseM = new AfficheReponseM();
 	GereMastermindVariable instanceGereMastermindVariable = new GereMastermindVariable();
 	ReglageListePossible instanceReglageListePossible = new ReglageListePossible();
-	
+
 	/*
 	 * Constructeur
 	 */
@@ -47,7 +47,7 @@ public class Mastermind implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Mastermind : Challenger");
-		System.out.println("Trouver la combinaison de l'IA en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
+		System.out.println("Trouver la combinaison de "+ instanceProprieteApplication.getTailleCombinaison() +" chiffre de l'IA en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// Génération d'une combinaison
@@ -252,7 +252,7 @@ public class Mastermind implements Jeux {
 		 * On affiche le jeu et le mode
 		 */
 		System.out.println("Mastermind : Duel");
-		System.out.println("Trouver la combinaison de l'IA avant qu'elle ne trouve la tienne et ce en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
+		System.out.println("Trouver la combinaison "+ instanceProprieteApplication.getTailleCombinaison() +"  de l'IA avant qu'elle ne trouve la tienne et ce en moins de " + instanceProprieteApplication.getCoupsMax() + " coups");
 		System.out.println();
 
 		// On demande au joueur de rentrer un combinaison
